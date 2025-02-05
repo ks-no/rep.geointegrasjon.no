@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MatrikkelKart" targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27" xmlns:tns="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.27">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.09.27" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.09.27" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.09.27" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2011.09.27" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2011.09.27" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.09.27" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.09.27" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.09.27" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2011.09.27" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.27" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2011.09.27" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.09.27" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.09.27" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.09.27" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.09.27" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2011.09.27" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.09.27" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.09.27" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.09.27" elementFormDefault="qualified">
+			<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.09.27" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.09.27/giMatrikkelFelles20110927.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.27" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.27/giFellesTeknisk20110927.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.09.27" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.09.27/giFellesGeometri20110927.xsd"/>
+			<xs:element name="FinnMatrikkelenheterForOmraade">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="selectionPolygon" type="fellesgeometrins:Kurve" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="matrikkelKontekst" type="fellestekniskns:MatrikkelKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnMatrikkelenheterForOmraadeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="matrikkelfellesns:MatrikkelnummerListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentBboxForMatrikkelenhet">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="matrikkelNummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="matrikkelKontekst" type="fellestekniskns:MatrikkelKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentBboxForMatrikkelenhetResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="fellesgeometrins:Bbox" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentOmraadeForMatrikkelenhet">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="matrikkelNummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="matrikkelKontekst" type="fellestekniskns:MatrikkelKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentOmraadeForMatrikkelenhetResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="fellesgeometrins:OmraadeListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SystemFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:SystemFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ImplementationFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ImplementationFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OperationalFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:OperationalFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ApplicationFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ApplicationFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinderFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:FinderFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ValidationFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ValidationFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="FinnMatrikkelenheterForOmraadeMessage">
+		<wsdl:part name="parameters" element="tns:FinnMatrikkelenheterForOmraade"/>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenheterForOmraadeResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnMatrikkelenheterForOmraadeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentBboxForMatrikkelenhetMessage">
+		<wsdl:part name="parameters" element="tns:HentBboxForMatrikkelenhet"/>
+	</wsdl:message>
+	<wsdl:message name="HentBboxForMatrikkelenhetResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentBboxForMatrikkelenhetResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForMatrikkelenhetMessage">
+		<wsdl:part name="parameters" element="tns:HentOmraadeForMatrikkelenhet"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForMatrikkelenhetResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentOmraadeForMatrikkelenhetResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SystemException">
+		<wsdl:part name="fault" element="fellestekniskns:SystemFault"/>
+	</wsdl:message>
+	<wsdl:message name="OperationalException">
+		<wsdl:part name="fault" element="fellestekniskns:OperationalFault"/>
+	</wsdl:message>
+	<wsdl:message name="ApplicationException">
+		<wsdl:part name="fault" element="fellestekniskns:ApplicationFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinderException">
+		<wsdl:part name="fault" element="fellestekniskns:FinderFault"/>
+	</wsdl:message>
+	<wsdl:message name="ValidationException">
+		<wsdl:part name="fault" element="fellestekniskns:ValidationFault"/>
+	</wsdl:message>
+	<wsdl:message name="ImplementationException">
+		<wsdl:part name="fault" element="fellestekniskns:ImplementationFault"/>
+	</wsdl:message>
+	<wsdl:portType name="MatrikkelkartPort">
+		<wsdl:operation name="FinnMatrikkelenheterForOmraade">
+			<wsdl:input name="FinnMatrikkelenheterForOmraade" message="tns:FinnMatrikkelenheterForOmraadeMessage"/>
+			<wsdl:output name="FinnMatrikkelenheterForOmraadeResponse" message="tns:FinnMatrikkelenheterForOmraadeResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentOmraadeForMatrikkelenhet">
+			<wsdl:input name="HentOmraadeForMatrikkelenhet" message="tns:HentOmraadeForMatrikkelenhetMessage"/>
+			<wsdl:output name="HentOmraadeForMatrikkelenhetResponse" message="tns:HentOmraadeForMatrikkelenhetResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentBboxForMatrikkelenhet">
+			<wsdl:input name="HentBboxForMatrikkelenhet" message="tns:HentBboxForMatrikkelenhetMessage"/>
+			<wsdl:output name="HentBboxForMatrikkelenhetResponse" message="tns:HentBboxForMatrikkelenhetResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MatrikkelkartSoap" type="tns:MatrikkelkartPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="HentOmraadeForMatrikkelenhet">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27/#HentOmraadeForMatrikkelenhet" style="document"/>
+			<wsdl:input name="HentOmraadeForMatrikkelenhet">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentOmraadeForMatrikkelenhetResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentBboxForMatrikkelenhet">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27/#HentBboxForMatrikkelenhet" style="document"/>
+			<wsdl:input name="HentBboxForMatrikkelenhet">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentBboxForMatrikkelenhetResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnMatrikkelenheterForOmraade">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27/#FinnMatrikkelenheterForOmraade" style="document"/>
+			<wsdl:input name="FinnMatrikkelenheterForOmraade">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnMatrikkelenheterForOmraadeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="KartService">
+		<wsdl:port name="Matrikkelkart" binding="tns:MatrikkelkartSoap">
+			<soap:address location="http://rep.geointegrasjon.no/Matrikkel/Kart/xml.wsdl/2011.09.27"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

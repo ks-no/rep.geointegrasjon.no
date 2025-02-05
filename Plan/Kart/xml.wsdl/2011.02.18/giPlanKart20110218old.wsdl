@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PlanKart" targetNamespace="http://rep.geointegrasjon.no/Plan/Kart/xml.wsdl/2011.02.18" xmlns:tns="http://rep.geointegrasjon.no/Plan/Kart/xml.wsdl/2011.02.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://rep.geointegrasjon.no/Plan/Kart/xml.wsdl/2011.02.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rep.geointegrasjon.no/Plan/Kart/xml.wsdl/2011.02.18" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.02.18" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.02.18" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2011.02.18" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2011.02.18" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.02.18" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2011.02.18" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2011.02.18" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.02.18" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2011.02.18" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.02.18" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.02.18" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.02.18" elementFormDefault="qualified">
+			<xs:import namespace="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.02.18/giPlanBasis20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.02.18/giPlanUtvidet20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18/giFellesGeometri20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18/giFellesTeknisk20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18/giPlanFelles20110218.xsd"/>
+			<xs:element name="HentBboxForPlan">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="planid" type="planfellesns:NasjonalArealplanId" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentBboxForPlanResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="fellesgeometrins:Bbox" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentBboxForPlanFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentPlanomraader">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="planid" type="planfellesns:NasjonalArealplanId" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentPlanomraaderResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:PlanomraadeListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentPlanomraaderFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnPlanerForOmraade">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="planstatus" type="planbasisns:PlanstatusListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="omraade" type="fellesgeometrins:Omraade" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnPlanerForOmraadeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planbasisns:ArealplanBaseListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnPlanerForOmraadeFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="HentBboxForPlanMessage">
+		<wsdl:part name="parameters" element="tns:HentBboxForPlan"/>
+	</wsdl:message>
+	<wsdl:message name="HentBboxForPlanResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentBboxForPlanResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentBboxForPlanFaultMessage">
+		<wsdl:part name="fault" element="tns:HentBboxForPlanFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentPlanomraaderMessage">
+		<wsdl:part name="parameters" element="tns:HentPlanomraader"/>
+	</wsdl:message>
+	<wsdl:message name="HentPlanomraaderResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentPlanomraaderResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentPlanomraaderFaultMessage">
+		<wsdl:part name="fault" element="tns:HentPlanomraaderFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlanerForOmraadeMessage">
+		<wsdl:part name="parameters" element="tns:FinnPlanerForOmraade"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlanerForOmraadeResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnPlanerForOmraadeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlanerForOmraadeFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnPlanerForOmraadeFault"/>
+	</wsdl:message>
+	<wsdl:portType name="PlanKart">
+		<wsdl:operation name="FinnPlanerForOmraade">
+			<wsdl:input name="FinnPlanerForOmraade" message="tns:FinnPlanerForOmraadeMessage"/>
+			<wsdl:output name="FinnPlanerForOmraadeResponse" message="tns:FinnPlanerForOmraadeResponseMessage"/>
+			<wsdl:fault name="FinnPlanerForOmraadeFault" message="tns:FinnPlanerForOmraadeFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentPlanomraader">
+			<wsdl:input name="HentPlanomraader" message="tns:HentPlanomraaderMessage"/>
+			<wsdl:output name="HentPlanomraaderResponse" message="tns:HentPlanomraaderResponseMessage"/>
+			<wsdl:fault name="HentPlanomraaderFault" message="tns:HentPlanomraaderFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentBboxForPlan">
+			<wsdl:input name="HentBboxForPlan" message="tns:HentBboxForPlanMessage"/>
+			<wsdl:output name="HentBboxForPlanResponse" message="tns:HentBboxForPlanResponseMessage"/>
+			<wsdl:fault name="HentBboxForPlanFault" message="tns:HentBboxForPlanFaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PlanKart" type="tns:PlanKart">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="FinnPlanerForOmraade">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Kart/xml.wsdl/2011.02.18/#FinnPlanerForOmraade" style="document"/>
+			<wsdl:input name="FinnPlanerForOmraade">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnPlanerForOmraadeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnPlanerForOmraadeFault">
+				<soap:fault name="FinnPlanerForOmraadeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentPlanomraader">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Kart/xml.wsdl/2011.02.18/#HentPlanomraader" style="document"/>
+			<wsdl:input name="HentPlanomraader">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentPlanomraaderResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentPlanomraaderFault">
+				<soap:fault name="HentPlanomraaderFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentBboxForPlan">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Kart/xml.wsdl/2011.02.18/#HentBboxForPlan" style="document"/>
+			<wsdl:input name="HentBboxForPlan">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentBboxForPlanResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentBboxForPlanFault">
+				<soap:fault name="HentBboxForPlanFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Kart">
+		<wsdl:port name="PlanKart" binding="tns:PlanKart">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

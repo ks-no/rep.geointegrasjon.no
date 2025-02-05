@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101222" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101222" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101222" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101222" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101222" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101222" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101222" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101222" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101222" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/Xml/Schema/20101222" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101222" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101222" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101222" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101222" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/Xml/Schema/20101222" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101222" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101222" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101222" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101222" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101222" elementFormDefault="qualified" version="20101222 - GeoIntegrasjon v0.97">
+	<xs:element name="Saksnoekkel" type="tns:Saksnoekkel"/>
+	<xs:complexType name="Saksnoekkel">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Saksnummer" type="tns:Saksnummer"/>
+	<xs:complexType name="Saksnummer">
+		<xs:complexContent>
+			<xs:extension base="tns:Saksnoekkel">
+				<xs:sequence>
+					<xs:element name="aar" type="xs:integer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>saSaar i n4
+      Fire siffer angis for år</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sekvensnummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>saSeknr i n4</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

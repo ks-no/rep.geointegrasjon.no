@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.02.18" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.02.18" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2011.02.18" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2011.02.18" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.02.18" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2011.02.18" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2011.02.18" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.02.18" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2011.02.18" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.02.18" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.02.18" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.02.18" elementFormDefault="qualified" version="2011.02.18 - GeoIntegrasjon v1.00.0">
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18/giFellesGeometri20110218.xsd"/>
+	<xs:element name="ApplicationException" type="tns:ApplicationException"/>
+	<xs:complexType name="ApplicationException">
+		<xs:complexContent>
+			<xs:extension base="tns:GeointegrasjonException">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ArkivKontekst" type="tns:ArkivKontekst"/>
+	<xs:complexType name="ArkivKontekst">
+		<xs:complexContent>
+			<xs:extension base="tns:Kontekst">
+				<xs:sequence>
+					<xs:element name="koordinatsystem" type="fellesgeometrins:KoordinatsystemKode" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="FinderException" type="tns:FinderException"/>
+	<xs:complexType name="FinderException">
+		<xs:complexContent>
+			<xs:extension base="tns:ApplicationException">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GeointegrasjonException" type="tns:GeointegrasjonException"/>
+	<xs:complexType name="GeointegrasjonException">
+		<xs:sequence>
+			<xs:element name="feilKode" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="feilBeskrivelse" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="feilDetaljer" type="tns:StringListe" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ImplementationException" type="tns:ImplementationException"/>
+	<xs:complexType name="ImplementationException">
+		<xs:complexContent>
+			<xs:extension base="tns:SystemException">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Kontekst" type="tns:Kontekst"/>
+	<xs:complexType name="Kontekst" abstract="true">
+		<xs:sequence>
+			<xs:element name="spraak" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="klientnavn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="klientversjon" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="systemversjon" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MatrikkelKontekst" type="tns:MatrikkelKontekst"/>
+	<xs:complexType name="MatrikkelKontekst">
+		<xs:complexContent>
+			<xs:extension base="tns:Kontekst">
+				<xs:sequence>
+					<xs:element name="koordinatsystem" type="fellesgeometrins:KoordinatsystemKode" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="OperationalException" type="tns:OperationalException"/>
+	<xs:complexType name="OperationalException">
+		<xs:complexContent>
+			<xs:extension base="tns:SystemException">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PlanKontekst" type="tns:PlanKontekst"/>
+	<xs:complexType name="PlanKontekst">
+		<xs:complexContent>
+			<xs:extension base="tns:Kontekst">
+				<xs:sequence>
+					<xs:element name="koordinatsystem" type="fellesgeometrins:KoordinatsystemKode" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StringListe" type="tns:StringListe"/>
+	<xs:complexType name="StringListe">
+		<xs:sequence>
+			<xs:element name="liste" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SystemException" type="tns:SystemException"/>
+	<xs:complexType name="SystemException">
+		<xs:complexContent>
+			<xs:extension base="tns:GeointegrasjonException">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ValidationException" type="tns:ValidationException"/>
+	<xs:complexType name="ValidationException">
+		<xs:complexContent>
+			<xs:extension base="tns:ApplicationException">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:arkivindrekjernens="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615" elementFormDefault="qualified" version="20100615 - GeoIntegrasjon v1.0">
+	<xs:element name="Fase" type="tns:Fase"/>
+	<xs:complexType name="Fase">
+		<xs:sequence>
+			<xs:element name="faseNavn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="faseBeskrivelse" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="startDato" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="sluttDato" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Milepel er knyttet til sluttdato</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="tns:FaseType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="status" type="tns:FaseStatus" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="milepelNavn" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Milepel er knyttet til sluttdato</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="milepelBeskrivelse" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FaseStatus" type="tns:FaseStatus"/>
+	<xs:complexType name="FaseStatus">
+		<xs:sequence>
+			<xs:element name="statusKode" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="statusBeskrivelse" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FaseType" type="tns:FaseType"/>
+	<xs:complexType name="FaseType">
+		<xs:sequence>
+			<xs:element name="typeKode" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="typeBeskrivelse" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

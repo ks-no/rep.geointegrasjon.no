@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101001" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101001" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20101001" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101001" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101001" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" elementFormDefault="qualified" version="20101001 - GeoIntegrasjon v0.96">
+	<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001/giMatrikkelBasis20101001.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001/giMatrikkelFelles20101001.xsd"/>
+	<xs:element name="Eiendom" type="tns:Eiendom"/>
+	<xs:complexType name="Eiendom">
+		<xs:sequence>
+			<xs:element name="matrikkelNummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Hovedeiendom" type="tns:Hovedeiendom"/>
+	<xs:complexType name="Hovedeiendom">
+		<xs:annotation>
+			<xs:documentation>Hovedeiendom, tidligere også kalt byggested. Den som det skal finnes naboer til.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Eiendom">
+				<xs:sequence>
+					<xs:element name="Nabo" type="tns:Nabo" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Nabo" type="tns:Nabo"/>
+	<xs:complexType name="Nabo">
+		<xs:complexContent>
+			<xs:extension base="tns:Eiendom">
+				<xs:sequence>
+					<xs:element name="eier" type="tns:Eier" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Naboliste" type="tns:Naboliste"/>
+	<xs:complexType name="Naboliste">
+		<xs:annotation>
+			<xs:documentation>Den konseptuelle datamodellen for en Naboliste er viser at nabolisten består opplysninger for en gitt eiendom som er hovedeiendom (også kaltByggested), og et antall eiendommer som er
+    dens Nabo. En nabo består av en eiendom og en eier. Dersom en nabo har flere eiere listes naboen opp på nytt.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Hovedeiendom" type="tns:Hovedeiendom" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nabo" type="tns:Nabo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

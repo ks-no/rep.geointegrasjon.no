@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100915" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100915" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100915" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100915" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100915" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100915" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20100915" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20100915" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20100915" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20100915" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20100915" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20100915" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20100915" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100915" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20100915" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100915" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20100915" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100915" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100915" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100915" elementFormDefault="qualified" version="20100915 - GeoIntegrasjon v0.94">
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20100915" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20100915/giFellesKodeliste20100915.xsd"/>
+	<xs:element name="Fase" type="tns:Fase"/>
+	<xs:complexType name="Fase">
+		<xs:sequence>
+			<xs:element name="faseNavn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="faseBeskrivelse" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="startDato" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="sluttDato" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Milepel er knyttet til sluttdato</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="tns:FaseType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="status" type="tns:FaseStatus" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Milepel" type="tns:Milepel" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FaseStatus" type="tns:FaseStatus"/>
+	<xs:complexType name="FaseStatus">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="FaseType" type="tns:FaseType"/>
+	<xs:complexType name="FaseType">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Milepel" type="tns:Milepel"/>
+	<xs:complexType name="Milepel">
+		<xs:sequence>
+			<xs:element name="milepelNavn" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Milepel er knyttet til sluttdato</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="milepelBeskrivelse" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SakFaser" targetNamespace="http://rep.geointegrasjon.no/Sak/Faser/xml.wsdl/2011.09.01" xmlns:tns="http://rep.geointegrasjon.no/Sak/Faser/xml.wsdl/2011.09.01" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://rep.geointegrasjon.no/Sak/Faser/xml.wsdl/2011.09.01" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rep.geointegrasjon.no/Sak/Faser/xml.wsdl/2011.09.01" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.09.01" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.09.01" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.09.01" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2011.09.01" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2011.09.01" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.09.01" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.09.01" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.09.01" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2011.09.01" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.01" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2011.09.01" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.09.01" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.09.01" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.09.01" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.09.01" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2011.09.01" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.09.01" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.09.01" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.09.01" elementFormDefault="qualified">
+			<xs:import namespace="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.09.01" schemaLocation="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.09.01/giSakFaser20110901.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18/giArkivFelles20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.01" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.01/giFellesTeknisk20110901.xsd"/>
+			<xs:element name="FinderExceptionFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:FinderException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ValidationExceptionFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ValidationException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentFaserForSak">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="saksnummer" type="tns:Saksnummer" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentFaserForSakResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="sakfaserns:FaseListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SystemExceptionFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:SystemException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ImplementationExceptionFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ImplementationException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OperationalExceptionFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:OperationalException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ApplicationExceptionFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ApplicationException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="HentFaserForSakMessage">
+		<wsdl:part name="parameters" element="tns:HentFaserForSak"/>
+	</wsdl:message>
+	<wsdl:message name="HentFaserForSakResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentFaserForSakResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SystemExceptionFaultMessage">
+		<wsdl:part name="fault" element="tns:SystemExceptionFault"/>
+	</wsdl:message>
+	<wsdl:message name="OperationalExceptionFaultMessage">
+		<wsdl:part name="fault" element="tns:OperationalExceptionFault"/>
+	</wsdl:message>
+	<wsdl:message name="ApplicationExceptionFaultMessage">
+		<wsdl:part name="fault" element="tns:ApplicationExceptionFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinderExceptionFaultMessage">
+		<wsdl:part name="fault" element="tns:FinderExceptionFault"/>
+	</wsdl:message>
+	<wsdl:message name="ValidationExceptionFaultMessage">
+		<wsdl:part name="fault" element="tns:ValidationExceptionFault"/>
+	</wsdl:message>
+	<wsdl:message name="ImplementationExceptionFaultMessage">
+		<wsdl:part name="fault" element="tns:ImplementationExceptionFault"/>
+	</wsdl:message>
+	<wsdl:portType name="Saksfaser">
+		<wsdl:operation name="HentFaserForSak">
+			<wsdl:input name="HentFaserForSak" message="tns:HentFaserForSakMessage"/>
+			<wsdl:output name="HentFaserForSakResponse" message="tns:HentFaserForSakResponseMessage"/>
+			<wsdl:fault name="SystemExceptionFault" message="tns:SystemExceptionFaultMessage"/>
+			<wsdl:fault name="ImplementationExceptionFault" message="tns:ImplementationExceptionFaultMessage"/>
+			<wsdl:fault name="OperationalExceptionFault" message="tns:OperationalExceptionFaultMessage"/>
+			<wsdl:fault name="ApplicationExceptionFault" message="tns:ApplicationExceptionFaultMessage"/>
+			<wsdl:fault name="FinderExceptionFault" message="tns:FinderExceptionFaultMessage"/>
+			<wsdl:fault name="ValidationExceptionFault" message="tns:ValidationExceptionFaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="Saksfaser" type="tns:Saksfaser">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="HentFaserForSak">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Sak/Faser/xml.wsdl/2011.09.01/#HentFaserForSak" style="document"/>
+			<wsdl:input name="HentFaserForSak">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentFaserForSakResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemExceptionFault">
+				<soap:fault name="SystemExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationExceptionFault">
+				<soap:fault name="ImplementationExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalExceptionFault">
+				<soap:fault name="OperationalExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationExceptionFault">
+				<soap:fault name="ApplicationExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderExceptionFault">
+				<soap:fault name="FinderExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationExceptionFault">
+				<soap:fault name="ValidationExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Faser">
+		<wsdl:port name="Saksfaser" binding="tns:Saksfaser">
+			<soap:address location="http://rep.geointegrasjon.no/Sak/Faser/xml.wsdl/2011.09.01"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

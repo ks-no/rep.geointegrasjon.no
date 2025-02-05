@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PlanUtvidet" targetNamespace="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31" xmlns:tns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2012.01.31" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2012.01.31" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2012.01.31" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2012.01.31" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2012.01.31" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2012.01.31" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2012.01.31" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2012.01.31" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2012.01.31" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2012.01.31" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2012.01.31" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2012.01.31" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2012.01.31" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2012.01.31" elementFormDefault="qualified">
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31/giArkivDokument20120131.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31/giFellesKodeliste20120131.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31/giArkivFelles20120131.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2012.01.31/giPlanFelles20120131.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2012.01.31/giPlanUtvidet20120131.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2012.01.31/giFellesFilter20120131.xsd"/>
+			<xs:element name="FinnDispensasjoner">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="sok" type="fellesfilterns:SoekskriterieListe" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDispensasjonerResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:DispensasjonListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnPlanbehandlinger">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="sok" type="fellesfilterns:SoekskriterieListe" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnPlanbehandlingerResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:PlanbehandlingListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentArealplan">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="planid" type="planfellesns:NasjonalArealplanId" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="returnerPlanbehandlinger" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentArealplanResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:Arealplan" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentGjeldendePlanbestemmelser">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="planid" type="planfellesns:NasjonalArealplanId" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentGjeldendePlanbestemmelserResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:PlandokumentListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentAktoerer">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="saksnummer" type="arkivfellesns:Saksnummer" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentAktoererResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:AktoerListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentRelatertePlaner">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="planid" type="planfellesns:NasjonalArealplanId" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentRelatertePlanerResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:PlanRelasjonListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentKodelister">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kodelistenavn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentKodelisterResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="felleskodelistens:KodeListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnPlandokumenter">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Arkivnavn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="saksnummer" type="arkivfellesns:Saksnummer" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="returnerFil" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnPlandokumenterResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="planutvidetns:PlandokumentListe" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentPlanfil">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="kontekst" type="fellestekniskns:PlanKontekst" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentPlanfilResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivdokumentns:Fil" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SystemFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:SystemFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ImplementationFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ImplementationFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OperationalFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:OperationalFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ApplicationFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ApplicationFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinderFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:FinderFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ValidationFaultInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:ValidationFault" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="FinnDispensasjonerMessage">
+		<wsdl:part name="parameters" element="tns:FinnDispensasjoner"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDispensasjonerResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnDispensasjonerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlanbehandlingerMessage">
+		<wsdl:part name="parameters" element="tns:FinnPlanbehandlinger"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlanbehandlingerResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnPlanbehandlingerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentArealplanMessage">
+		<wsdl:part name="parameters" element="tns:HentArealplan"/>
+	</wsdl:message>
+	<wsdl:message name="HentArealplanResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentArealplanResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentGjeldendePlanbestemmelserMessage">
+		<wsdl:part name="parameters" element="tns:HentGjeldendePlanbestemmelser"/>
+	</wsdl:message>
+	<wsdl:message name="HentGjeldendePlanbestemmelserResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentGjeldendePlanbestemmelserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentAktoererMessage">
+		<wsdl:part name="parameters" element="tns:HentAktoerer"/>
+	</wsdl:message>
+	<wsdl:message name="HentAktoererResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentAktoererResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentRelatertePlanerMessage">
+		<wsdl:part name="parameters" element="tns:HentRelatertePlaner"/>
+	</wsdl:message>
+	<wsdl:message name="HentRelatertePlanerResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentRelatertePlanerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisterMessage">
+		<wsdl:part name="parameters" element="tns:HentKodelister"/>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisterResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentKodelisterResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlandokumenterMessage">
+		<wsdl:part name="parameters" element="tns:FinnPlandokumenter"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlandokumenterResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnPlandokumenterResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentPlanfilMessage">
+		<wsdl:part name="parameters" element="tns:HentPlanfil"/>
+	</wsdl:message>
+	<wsdl:message name="HentPlanfilResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentPlanfilResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SystemException">
+		<wsdl:part name="fault" element="fellestekniskns:SystemFault"/>
+	</wsdl:message>
+	<wsdl:message name="OperationalException">
+		<wsdl:part name="fault" element="fellestekniskns:OperationalFault"/>
+	</wsdl:message>
+	<wsdl:message name="ApplicationException">
+		<wsdl:part name="fault" element="fellestekniskns:ApplicationFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinderException">
+		<wsdl:part name="fault" element="fellestekniskns:FinderFault"/>
+	</wsdl:message>
+	<wsdl:message name="ValidationException">
+		<wsdl:part name="fault" element="fellestekniskns:ValidationFault"/>
+	</wsdl:message>
+	<wsdl:message name="ImplementationException">
+		<wsdl:part name="fault" element="fellestekniskns:ImplementationFault"/>
+	</wsdl:message>
+	<wsdl:portType name="PlanUtvidetPort">
+		<wsdl:operation name="HentPlanfil">
+			<wsdl:input name="HentPlanfil" message="tns:HentPlanfilMessage"/>
+			<wsdl:output name="HentPlanfilResponse" message="tns:HentPlanfilResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnPlandokumenter">
+			<wsdl:input name="FinnPlandokumenter" message="tns:FinnPlandokumenterMessage"/>
+			<wsdl:output name="FinnPlandokumenterResponse" message="tns:FinnPlandokumenterResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentKodelister">
+			<wsdl:input name="HentKodelister" message="tns:HentKodelisterMessage"/>
+			<wsdl:output name="HentKodelisterResponse" message="tns:HentKodelisterResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentRelatertePlaner">
+			<wsdl:input name="HentRelatertePlaner" message="tns:HentRelatertePlanerMessage"/>
+			<wsdl:output name="HentRelatertePlanerResponse" message="tns:HentRelatertePlanerResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentAktoerer">
+			<wsdl:input name="HentAktoerer" message="tns:HentAktoererMessage"/>
+			<wsdl:output name="HentAktoererResponse" message="tns:HentAktoererResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentGjeldendePlanbestemmelser">
+			<wsdl:input name="HentGjeldendePlanbestemmelser" message="tns:HentGjeldendePlanbestemmelserMessage"/>
+			<wsdl:output name="HentGjeldendePlanbestemmelserResponse" message="tns:HentGjeldendePlanbestemmelserResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentArealplan">
+			<wsdl:input name="HentArealplan" message="tns:HentArealplanMessage"/>
+			<wsdl:output name="HentArealplanResponse" message="tns:HentArealplanResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnPlanbehandlinger">
+			<wsdl:input name="FinnPlanbehandlinger" message="tns:FinnPlanbehandlingerMessage"/>
+			<wsdl:output name="FinnPlanbehandlingerResponse" message="tns:FinnPlanbehandlingerResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDispensasjoner">
+			<wsdl:input name="FinnDispensasjoner" message="tns:FinnDispensasjonerMessage"/>
+			<wsdl:output name="FinnDispensasjonerResponse" message="tns:FinnDispensasjonerResponseMessage"/>
+			<wsdl:fault name="SystemFaultInfo" message="tns:SystemException"/>
+			<wsdl:fault name="ImplementationFaultInfo" message="tns:ImplementationException"/>
+			<wsdl:fault name="OperationalFaultInfo" message="tns:OperationalException"/>
+			<wsdl:fault name="ApplicationFaultInfo" message="tns:ApplicationException"/>
+			<wsdl:fault name="FinderFaultInfo" message="tns:FinderException"/>
+			<wsdl:fault name="ValidationFaultInfo" message="tns:ValidationException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PlanUtvidetSoap" type="tns:PlanUtvidetPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="HentPlanfil">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#HentPlanfil" style="document"/>
+			<wsdl:input name="HentPlanfil">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentPlanfilResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnPlandokumenter">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#FinnPlandokumenter" style="document"/>
+			<wsdl:input name="FinnPlandokumenter">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnPlandokumenterResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentKodelister">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#HentKodelister" style="document"/>
+			<wsdl:input name="HentKodelister">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentKodelisterResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentRelatertePlaner">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#HentRelatertePlaner" style="document"/>
+			<wsdl:input name="HentRelatertePlaner">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentRelatertePlanerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentAktoerer">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#HentAktoerer" style="document"/>
+			<wsdl:input name="HentAktoerer">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentAktoererResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentGjeldendePlanbestemmelser">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#HentGjeldendePlanbestemmelser" style="document"/>
+			<wsdl:input name="HentGjeldendePlanbestemmelser">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentGjeldendePlanbestemmelserResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentArealplan">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#HentArealplan" style="document"/>
+			<wsdl:input name="HentArealplan">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentArealplanResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnPlanbehandlinger">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#FinnPlanbehandlinger" style="document"/>
+			<wsdl:input name="FinnPlanbehandlinger">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnPlanbehandlingerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDispensasjoner">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31/#FinnDispensasjoner" style="document"/>
+			<wsdl:input name="FinnDispensasjoner">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDispensasjonerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SystemFaultInfo">
+				<soap:fault name="SystemFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ImplementationFaultInfo">
+				<soap:fault name="ImplementationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="OperationalFaultInfo">
+				<soap:fault name="OperationalFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ApplicationFaultInfo">
+				<soap:fault name="ApplicationFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="FinderFaultInfo">
+				<soap:fault name="FinderFaultInfo" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultInfo">
+				<soap:fault name="ValidationFaultInfo" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="UtvidetService">
+		<wsdl:port name="PlanUtvidet" binding="tns:PlanUtvidetSoap">
+			<soap:address location="http://rep.geointegrasjon.no/Plan/Utvidet/xml.wsdl/2012.01.31"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:arkivindrekjernens="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615" elementFormDefault="qualified" version="20100615 - GeoIntegrasjon v1.0">
+	<xs:element name="Saksnummer" type="tns:Saksnummer"/>
+	<xs:complexType name="Saksnummer">
+		<xs:sequence>
+			<xs:element name="saSaar" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="saSeknr" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

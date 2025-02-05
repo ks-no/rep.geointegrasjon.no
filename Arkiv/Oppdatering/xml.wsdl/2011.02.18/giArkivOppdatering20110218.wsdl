@@ -1,0 +1,1170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ArkivOppdatering" targetNamespace="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.02.18" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.02.18" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2011.02.18" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2011.02.18" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.02.18" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2011.02.18" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2011.02.18" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.02.18" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2011.02.18" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.02.18" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.02.18" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.02.18" elementFormDefault="qualified">
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18/giArkivDokument20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18/giFellesFilter20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18/giPlanFelles20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18/giFellesGeometri20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.02.18/giMatrikkelFelles20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18/giArkivFelles20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18/giArkivKjerne20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18/giFellesTeknisk20110218.xsd"/>
+			<xs:element name="NySaksmappe">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="mappe" type="arkivkjernens:Saksmappe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NySaksmappeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:Saksmappe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NySaksmappeFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeStatus">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksstatuskode" type="arkivkjernens:Saksstatus" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeStatusResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:Saksmappe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeStatusFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeEksternNoekkel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nokkel" type="arkivkjernens:EksternNoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeEksternNoekkelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:Saksmappe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeEksternNoekkelFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeAnsvarlig">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nyAdministrativEnhetKode" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nySaksbehandlerInit" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeAnsvarligResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:Saksmappe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterMappeAnsvarligFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyMatrikkelnummer">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="matrikkelnr" type="matrikkelfellesns:Matrikkelnummer" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyMatrikkelnummerResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyMatrikkelnummerFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettMatrikkelnummer">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="matrikkelnr" type="matrikkelfellesns:Matrikkelnummer" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettMatrikkelnummerResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettMatrikkelnummerFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyBygning">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="bygning" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyBygningResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyBygningFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettBygning">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="bygning" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettBygningResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettBygningFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyPunkt">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="posisjon" type="fellesgeometrins:Punkt" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyPunktResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyPunktFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettPunkt">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="posisjon" type="fellesgeometrins:Punkt" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettPunktResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettPunktFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NySakspart">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="sakspart" type="arkivkjernens:Sakspart" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NySakspartResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NySakspartFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettSakspart">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettSakspartResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettSakspartFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterPlan">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="planid" type="planfellesns:NasjonalArealplanId" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterPlanResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterPlanFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalpostRestanser">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="ansvarlig" type="fellesfilterns:Ansvarlig" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalpostRestanserResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:JournalpostListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalpostRestanserFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterUnderArbeid">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="ansvarlig" type="fellesfilterns:Ansvarlig" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterUnderArbeidResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:JournalpostListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterUnderArbeidFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyJournalpost">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalpost" type="arkivkjernens:Journalpost" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyJournalpostResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:Journalpost" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyJournalpostFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostAnsvarlig">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalpostnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nyAdministrativEnhetKode" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nySaksbehandlerInit" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostAnsvarligResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:Journalpost" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostAnsvarligFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyKorrespondansepart">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="part" type="arkivkjernens:Korrespondansepart" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalpostnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyKorrespondansepartResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyKorrespondansepartFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettKorrespondansepart">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalpostnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettKorrespondansepartResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettKorrespondansepartFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyttDokument">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="dokument" type="arkivdokumentns:Dokument" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyttDokumentResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivdokumentns:Dokument" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyttDokumentFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostEksternNoekkel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalpostnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nokkel" type="arkivkjernens:EksternNoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostEksternNoekkelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:Journalpost" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostEksternNoekkelFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostStatus">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalstatus" type="arkivkjernens:Journalstatus" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostStatusResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OppdaterJournalpostStatusFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyAvskrivning">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="avskrivning" type="arkivkjernens:Avskrivning" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyAvskrivningResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NyAvskrivningFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettAvskrivning">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journalnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettAvskrivningResponse">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SlettAvskrivningFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="NySaksmappeMessage">
+		<wsdl:part name="parameters" element="tns:NySaksmappe"/>
+	</wsdl:message>
+	<wsdl:message name="NySaksmappeResponseMessage">
+		<wsdl:part name="parameters" element="tns:NySaksmappeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NySaksmappeFaultMessage">
+		<wsdl:part name="fault" element="tns:NySaksmappeFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeStatusMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterMappeStatus"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeStatusResponseMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterMappeStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeStatusFaultMessage">
+		<wsdl:part name="fault" element="tns:OppdaterMappeStatusFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeEksternNoekkelMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterMappeEksternNoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeEksternNoekkelResponseMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterMappeEksternNoekkelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeEksternNoekkelFaultMessage">
+		<wsdl:part name="fault" element="tns:OppdaterMappeEksternNoekkelFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeAnsvarligMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterMappeAnsvarlig"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeAnsvarligResponseMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterMappeAnsvarligResponse"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeAnsvarligFaultMessage">
+		<wsdl:part name="fault" element="tns:OppdaterMappeAnsvarligFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyMatrikkelnummerMessage">
+		<wsdl:part name="parameters" element="tns:NyMatrikkelnummer"/>
+	</wsdl:message>
+	<wsdl:message name="NyMatrikkelnummerResponseMessage">
+		<wsdl:part name="parameters" element="tns:NyMatrikkelnummerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NyMatrikkelnummerFaultMessage">
+		<wsdl:part name="fault" element="tns:NyMatrikkelnummerFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettMatrikkelnummerMessage">
+		<wsdl:part name="parameters" element="tns:SlettMatrikkelnummer"/>
+	</wsdl:message>
+	<wsdl:message name="SlettMatrikkelnummerResponseMessage">
+		<wsdl:part name="parameters" element="tns:SlettMatrikkelnummerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SlettMatrikkelnummerFaultMessage">
+		<wsdl:part name="fault" element="tns:SlettMatrikkelnummerFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyBygningMessage">
+		<wsdl:part name="parameters" element="tns:NyBygning"/>
+	</wsdl:message>
+	<wsdl:message name="NyBygningResponseMessage">
+		<wsdl:part name="parameters" element="tns:NyBygningResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NyBygningFaultMessage">
+		<wsdl:part name="fault" element="tns:NyBygningFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettBygningMessage">
+		<wsdl:part name="parameters" element="tns:SlettBygning"/>
+	</wsdl:message>
+	<wsdl:message name="SlettBygningResponseMessage">
+		<wsdl:part name="parameters" element="tns:SlettBygningResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SlettBygningFaultMessage">
+		<wsdl:part name="fault" element="tns:SlettBygningFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyPunktMessage">
+		<wsdl:part name="parameters" element="tns:NyPunkt"/>
+	</wsdl:message>
+	<wsdl:message name="NyPunktResponseMessage">
+		<wsdl:part name="parameters" element="tns:NyPunktResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NyPunktFaultMessage">
+		<wsdl:part name="fault" element="tns:NyPunktFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettPunktMessage">
+		<wsdl:part name="parameters" element="tns:SlettPunkt"/>
+	</wsdl:message>
+	<wsdl:message name="SlettPunktResponseMessage">
+		<wsdl:part name="parameters" element="tns:SlettPunktResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SlettPunktFaultMessage">
+		<wsdl:part name="fault" element="tns:SlettPunktFault"/>
+	</wsdl:message>
+	<wsdl:message name="NySakspartMessage">
+		<wsdl:part name="parameters" element="tns:NySakspart"/>
+	</wsdl:message>
+	<wsdl:message name="NySakspartResponseMessage">
+		<wsdl:part name="parameters" element="tns:NySakspartResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NySakspartFaultMessage">
+		<wsdl:part name="fault" element="tns:NySakspartFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettSakspartMessage">
+		<wsdl:part name="parameters" element="tns:SlettSakspart"/>
+	</wsdl:message>
+	<wsdl:message name="SlettSakspartResponseMessage">
+		<wsdl:part name="parameters" element="tns:SlettSakspartResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SlettSakspartFaultMessage">
+		<wsdl:part name="fault" element="tns:SlettSakspartFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterPlanMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterPlan"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterPlanResponseMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterPlanResponse"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterPlanFaultMessage">
+		<wsdl:part name="fault" element="tns:OppdaterPlanFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalpostRestanserMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalpostRestanser"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalpostRestanserResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalpostRestanserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalpostRestanserFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnJournalpostRestanserFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterUnderArbeidMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposterUnderArbeid"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterUnderArbeidResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposterUnderArbeidResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterUnderArbeidFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnJournalposterUnderArbeidFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyJournalpostMessage">
+		<wsdl:part name="parameters" element="tns:NyJournalpost"/>
+	</wsdl:message>
+	<wsdl:message name="NyJournalpostResponseMessage">
+		<wsdl:part name="parameters" element="tns:NyJournalpostResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NyJournalpostFaultMessage">
+		<wsdl:part name="fault" element="tns:NyJournalpostFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostAnsvarligMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterJournalpostAnsvarlig"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostAnsvarligResponseMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterJournalpostAnsvarligResponse"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostAnsvarligFaultMessage">
+		<wsdl:part name="fault" element="tns:OppdaterJournalpostAnsvarligFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyKorrespondansepartMessage">
+		<wsdl:part name="parameters" element="tns:NyKorrespondansepart"/>
+	</wsdl:message>
+	<wsdl:message name="NyKorrespondansepartResponseMessage">
+		<wsdl:part name="parameters" element="tns:NyKorrespondansepartResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NyKorrespondansepartFaultMessage">
+		<wsdl:part name="fault" element="tns:NyKorrespondansepartFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettKorrespondansepartMessage">
+		<wsdl:part name="parameters" element="tns:SlettKorrespondansepart"/>
+	</wsdl:message>
+	<wsdl:message name="SlettKorrespondansepartResponseMessage">
+		<wsdl:part name="parameters" element="tns:SlettKorrespondansepartResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SlettKorrespondansepartFaultMessage">
+		<wsdl:part name="fault" element="tns:SlettKorrespondansepartFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyttDokumentMessage">
+		<wsdl:part name="parameters" element="tns:NyttDokument"/>
+	</wsdl:message>
+	<wsdl:message name="NyttDokumentResponseMessage">
+		<wsdl:part name="parameters" element="tns:NyttDokumentResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NyttDokumentFaultMessage">
+		<wsdl:part name="fault" element="tns:NyttDokumentFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostEksternNoekkelMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterJournalpostEksternNoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostEksternNoekkelResponseMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterJournalpostEksternNoekkelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostEksternNoekkelFaultMessage">
+		<wsdl:part name="fault" element="tns:OppdaterJournalpostEksternNoekkelFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostStatusMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterJournalpostStatus"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostStatusResponseMessage">
+		<wsdl:part name="parameters" element="tns:OppdaterJournalpostStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostStatusFaultMessage">
+		<wsdl:part name="fault" element="tns:OppdaterJournalpostStatusFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyAvskrivningMessage">
+		<wsdl:part name="parameters" element="tns:NyAvskrivning"/>
+	</wsdl:message>
+	<wsdl:message name="NyAvskrivningResponseMessage">
+		<wsdl:part name="parameters" element="tns:NyAvskrivningResponse"/>
+	</wsdl:message>
+	<wsdl:message name="NyAvskrivningFaultMessage">
+		<wsdl:part name="fault" element="tns:NyAvskrivningFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettAvskrivningMessage">
+		<wsdl:part name="parameters" element="tns:SlettAvskrivning"/>
+	</wsdl:message>
+	<wsdl:message name="SlettAvskrivningResponseMessage">
+		<wsdl:part name="parameters" element="tns:SlettAvskrivningResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SlettAvskrivningFaultMessage">
+		<wsdl:part name="fault" element="tns:SlettAvskrivningFault"/>
+	</wsdl:message>
+	<wsdl:portType name="SakArkivOppdatering">
+		<wsdl:operation name="SlettAvskrivning">
+			<wsdl:input name="SlettAvskrivning" message="tns:SlettAvskrivningMessage"/>
+			<wsdl:output name="SlettAvskrivningResponse" message="tns:SlettAvskrivningResponseMessage"/>
+			<wsdl:fault name="SlettAvskrivningFault" message="tns:SlettAvskrivningFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyAvskrivning">
+			<wsdl:input name="NyAvskrivning" message="tns:NyAvskrivningMessage"/>
+			<wsdl:output name="NyAvskrivningResponse" message="tns:NyAvskrivningResponseMessage"/>
+			<wsdl:fault name="NyAvskrivningFault" message="tns:NyAvskrivningFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostStatus">
+			<wsdl:input name="OppdaterJournalpostStatus" message="tns:OppdaterJournalpostStatusMessage"/>
+			<wsdl:output name="OppdaterJournalpostStatusResponse" message="tns:OppdaterJournalpostStatusResponseMessage"/>
+			<wsdl:fault name="OppdaterJournalpostStatusFault" message="tns:OppdaterJournalpostStatusFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostEksternNoekkel">
+			<wsdl:input name="OppdaterJournalpostEksternNoekkel" message="tns:OppdaterJournalpostEksternNoekkelMessage"/>
+			<wsdl:output name="OppdaterJournalpostEksternNoekkelResponse" message="tns:OppdaterJournalpostEksternNoekkelResponseMessage"/>
+			<wsdl:fault name="OppdaterJournalpostEksternNoekkelFault" message="tns:OppdaterJournalpostEksternNoekkelFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyttDokument">
+			<wsdl:input name="NyttDokument" message="tns:NyttDokumentMessage"/>
+			<wsdl:output name="NyttDokumentResponse" message="tns:NyttDokumentResponseMessage"/>
+			<wsdl:fault name="NyttDokumentFault" message="tns:NyttDokumentFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettKorrespondansepart">
+			<wsdl:input name="SlettKorrespondansepart" message="tns:SlettKorrespondansepartMessage"/>
+			<wsdl:output name="SlettKorrespondansepartResponse" message="tns:SlettKorrespondansepartResponseMessage"/>
+			<wsdl:fault name="SlettKorrespondansepartFault" message="tns:SlettKorrespondansepartFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyKorrespondansepart">
+			<wsdl:input name="NyKorrespondansepart" message="tns:NyKorrespondansepartMessage"/>
+			<wsdl:output name="NyKorrespondansepartResponse" message="tns:NyKorrespondansepartResponseMessage"/>
+			<wsdl:fault name="NyKorrespondansepartFault" message="tns:NyKorrespondansepartFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostAnsvarlig">
+			<wsdl:input name="OppdaterJournalpostAnsvarlig" message="tns:OppdaterJournalpostAnsvarligMessage"/>
+			<wsdl:output name="OppdaterJournalpostAnsvarligResponse" message="tns:OppdaterJournalpostAnsvarligResponseMessage"/>
+			<wsdl:fault name="OppdaterJournalpostAnsvarligFault" message="tns:OppdaterJournalpostAnsvarligFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyJournalpost">
+			<wsdl:input name="NyJournalpost" message="tns:NyJournalpostMessage"/>
+			<wsdl:output name="NyJournalpostResponse" message="tns:NyJournalpostResponseMessage"/>
+			<wsdl:fault name="NyJournalpostFault" message="tns:NyJournalpostFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterUnderArbeid">
+			<wsdl:input name="FinnJournalposterUnderArbeid" message="tns:FinnJournalposterUnderArbeidMessage"/>
+			<wsdl:output name="FinnJournalposterUnderArbeidResponse" message="tns:FinnJournalposterUnderArbeidResponseMessage"/>
+			<wsdl:fault name="FinnJournalposterUnderArbeidFault" message="tns:FinnJournalposterUnderArbeidFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalpostRestanser">
+			<wsdl:input name="FinnJournalpostRestanser" message="tns:FinnJournalpostRestanserMessage"/>
+			<wsdl:output name="FinnJournalpostRestanserResponse" message="tns:FinnJournalpostRestanserResponseMessage"/>
+			<wsdl:fault name="FinnJournalpostRestanserFault" message="tns:FinnJournalpostRestanserFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterPlan">
+			<wsdl:input name="OppdaterPlan" message="tns:OppdaterPlanMessage"/>
+			<wsdl:output name="OppdaterPlanResponse" message="tns:OppdaterPlanResponseMessage"/>
+			<wsdl:fault name="OppdaterPlanFault" message="tns:OppdaterPlanFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettSakspart">
+			<wsdl:input name="SlettSakspart" message="tns:SlettSakspartMessage"/>
+			<wsdl:output name="SlettSakspartResponse" message="tns:SlettSakspartResponseMessage"/>
+			<wsdl:fault name="SlettSakspartFault" message="tns:SlettSakspartFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NySakspart">
+			<wsdl:input name="NySakspart" message="tns:NySakspartMessage"/>
+			<wsdl:output name="NySakspartResponse" message="tns:NySakspartResponseMessage"/>
+			<wsdl:fault name="NySakspartFault" message="tns:NySakspartFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettPunkt">
+			<wsdl:input name="SlettPunkt" message="tns:SlettPunktMessage"/>
+			<wsdl:output name="SlettPunktResponse" message="tns:SlettPunktResponseMessage"/>
+			<wsdl:fault name="SlettPunktFault" message="tns:SlettPunktFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyPunkt">
+			<wsdl:input name="NyPunkt" message="tns:NyPunktMessage"/>
+			<wsdl:output name="NyPunktResponse" message="tns:NyPunktResponseMessage"/>
+			<wsdl:fault name="NyPunktFault" message="tns:NyPunktFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettBygning">
+			<wsdl:input name="SlettBygning" message="tns:SlettBygningMessage"/>
+			<wsdl:output name="SlettBygningResponse" message="tns:SlettBygningResponseMessage"/>
+			<wsdl:fault name="SlettBygningFault" message="tns:SlettBygningFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyBygning">
+			<wsdl:input name="NyBygning" message="tns:NyBygningMessage"/>
+			<wsdl:output name="NyBygningResponse" message="tns:NyBygningResponseMessage"/>
+			<wsdl:fault name="NyBygningFault" message="tns:NyBygningFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettMatrikkelnummer">
+			<wsdl:input name="SlettMatrikkelnummer" message="tns:SlettMatrikkelnummerMessage"/>
+			<wsdl:output name="SlettMatrikkelnummerResponse" message="tns:SlettMatrikkelnummerResponseMessage"/>
+			<wsdl:fault name="SlettMatrikkelnummerFault" message="tns:SlettMatrikkelnummerFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyMatrikkelnummer">
+			<wsdl:input name="NyMatrikkelnummer" message="tns:NyMatrikkelnummerMessage"/>
+			<wsdl:output name="NyMatrikkelnummerResponse" message="tns:NyMatrikkelnummerResponseMessage"/>
+			<wsdl:fault name="NyMatrikkelnummerFault" message="tns:NyMatrikkelnummerFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeAnsvarlig">
+			<wsdl:input name="OppdaterMappeAnsvarlig" message="tns:OppdaterMappeAnsvarligMessage"/>
+			<wsdl:output name="OppdaterMappeAnsvarligResponse" message="tns:OppdaterMappeAnsvarligResponseMessage"/>
+			<wsdl:fault name="OppdaterMappeAnsvarligFault" message="tns:OppdaterMappeAnsvarligFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeEksternNoekkel">
+			<wsdl:input name="OppdaterMappeEksternNoekkel" message="tns:OppdaterMappeEksternNoekkelMessage"/>
+			<wsdl:output name="OppdaterMappeEksternNoekkelResponse" message="tns:OppdaterMappeEksternNoekkelResponseMessage"/>
+			<wsdl:fault name="OppdaterMappeEksternNoekkelFault" message="tns:OppdaterMappeEksternNoekkelFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeStatus">
+			<wsdl:input name="OppdaterMappeStatus" message="tns:OppdaterMappeStatusMessage"/>
+			<wsdl:output name="OppdaterMappeStatusResponse" message="tns:OppdaterMappeStatusResponseMessage"/>
+			<wsdl:fault name="OppdaterMappeStatusFault" message="tns:OppdaterMappeStatusFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="NySaksmappe">
+			<wsdl:input name="NySaksmappe" message="tns:NySaksmappeMessage"/>
+			<wsdl:output name="NySaksmappeResponse" message="tns:NySaksmappeResponseMessage"/>
+			<wsdl:fault name="NySaksmappeFault" message="tns:NySaksmappeFaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SakArkivOppdatering" type="tns:SakArkivOppdatering">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="SlettAvskrivning">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#SlettAvskrivning" style="document"/>
+			<wsdl:input name="SlettAvskrivning">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SlettAvskrivningResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SlettAvskrivningFault">
+				<soap:fault name="SlettAvskrivningFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyAvskrivning">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NyAvskrivning" style="document"/>
+			<wsdl:input name="NyAvskrivning">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyAvskrivningResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyAvskrivningFault">
+				<soap:fault name="NyAvskrivningFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostStatus">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#OppdaterJournalpostStatus" style="document"/>
+			<wsdl:input name="OppdaterJournalpostStatus">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterJournalpostStatusResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterJournalpostStatusFault">
+				<soap:fault name="OppdaterJournalpostStatusFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostEksternNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#OppdaterJournalpostEksternNoekkel" style="document"/>
+			<wsdl:input name="OppdaterJournalpostEksternNoekkel">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterJournalpostEksternNoekkelResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterJournalpostEksternNoekkelFault">
+				<soap:fault name="OppdaterJournalpostEksternNoekkelFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyttDokument">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NyttDokument" style="document"/>
+			<wsdl:input name="NyttDokument">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyttDokumentResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyttDokumentFault">
+				<soap:fault name="NyttDokumentFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettKorrespondansepart">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#SlettKorrespondansepart" style="document"/>
+			<wsdl:input name="SlettKorrespondansepart">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SlettKorrespondansepartResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SlettKorrespondansepartFault">
+				<soap:fault name="SlettKorrespondansepartFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyKorrespondansepart">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NyKorrespondansepart" style="document"/>
+			<wsdl:input name="NyKorrespondansepart">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyKorrespondansepartResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyKorrespondansepartFault">
+				<soap:fault name="NyKorrespondansepartFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostAnsvarlig">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#OppdaterJournalpostAnsvarlig" style="document"/>
+			<wsdl:input name="OppdaterJournalpostAnsvarlig">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterJournalpostAnsvarligResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterJournalpostAnsvarligFault">
+				<soap:fault name="OppdaterJournalpostAnsvarligFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyJournalpost">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NyJournalpost" style="document"/>
+			<wsdl:input name="NyJournalpost">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyJournalpostResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyJournalpostFault">
+				<soap:fault name="NyJournalpostFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterUnderArbeid">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#FinnJournalposterUnderArbeid" style="document"/>
+			<wsdl:input name="FinnJournalposterUnderArbeid">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterUnderArbeidResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterUnderArbeidFault">
+				<soap:fault name="FinnJournalposterUnderArbeidFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalpostRestanser">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#FinnJournalpostRestanser" style="document"/>
+			<wsdl:input name="FinnJournalpostRestanser">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalpostRestanserResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalpostRestanserFault">
+				<soap:fault name="FinnJournalpostRestanserFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterPlan">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#OppdaterPlan" style="document"/>
+			<wsdl:input name="OppdaterPlan">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterPlanResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterPlanFault">
+				<soap:fault name="OppdaterPlanFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettSakspart">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#SlettSakspart" style="document"/>
+			<wsdl:input name="SlettSakspart">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SlettSakspartResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SlettSakspartFault">
+				<soap:fault name="SlettSakspartFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NySakspart">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NySakspart" style="document"/>
+			<wsdl:input name="NySakspart">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NySakspartResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NySakspartFault">
+				<soap:fault name="NySakspartFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettPunkt">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#SlettPunkt" style="document"/>
+			<wsdl:input name="SlettPunkt">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SlettPunktResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SlettPunktFault">
+				<soap:fault name="SlettPunktFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyPunkt">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NyPunkt" style="document"/>
+			<wsdl:input name="NyPunkt">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyPunktResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyPunktFault">
+				<soap:fault name="NyPunktFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettBygning">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#SlettBygning" style="document"/>
+			<wsdl:input name="SlettBygning">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SlettBygningResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SlettBygningFault">
+				<soap:fault name="SlettBygningFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyBygning">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NyBygning" style="document"/>
+			<wsdl:input name="NyBygning">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyBygningResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyBygningFault">
+				<soap:fault name="NyBygningFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettMatrikkelnummer">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#SlettMatrikkelnummer" style="document"/>
+			<wsdl:input name="SlettMatrikkelnummer">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SlettMatrikkelnummerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SlettMatrikkelnummerFault">
+				<soap:fault name="SlettMatrikkelnummerFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyMatrikkelnummer">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NyMatrikkelnummer" style="document"/>
+			<wsdl:input name="NyMatrikkelnummer">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyMatrikkelnummerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyMatrikkelnummerFault">
+				<soap:fault name="NyMatrikkelnummerFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeAnsvarlig">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#OppdaterMappeAnsvarlig" style="document"/>
+			<wsdl:input name="OppdaterMappeAnsvarlig">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterMappeAnsvarligResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterMappeAnsvarligFault">
+				<soap:fault name="OppdaterMappeAnsvarligFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeEksternNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#OppdaterMappeEksternNoekkel" style="document"/>
+			<wsdl:input name="OppdaterMappeEksternNoekkel">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterMappeEksternNoekkelResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterMappeEksternNoekkelFault">
+				<soap:fault name="OppdaterMappeEksternNoekkelFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeStatus">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#OppdaterMappeStatus" style="document"/>
+			<wsdl:input name="OppdaterMappeStatus">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterMappeStatusResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterMappeStatusFault">
+				<soap:fault name="OppdaterMappeStatusFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NySaksmappe">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Oppdatering/xml.wsdl/2011.02.18/#NySaksmappe" style="document"/>
+			<wsdl:input name="NySaksmappe">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NySaksmappeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NySaksmappeFault">
+				<soap:fault name="NySaksmappeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Oppdatering">
+		<wsdl:port name="SakArkivOppdatering" binding="tns:SakArkivOppdatering">
+			<soap:address location="http://www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

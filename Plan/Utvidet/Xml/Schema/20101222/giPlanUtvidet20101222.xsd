@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101222" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101222" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101222" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101222" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101222" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101222" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101222" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101222" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101222" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/Xml/Schema/20101222" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101222" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101222" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101222" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101222" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/Xml/Schema/20101222" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101222" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101222" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101222" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101222" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101222" elementFormDefault="qualified" version="20101222 - GeoIntegrasjon v0.97">
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101222/giFellesGeometri20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101222/giArkivFelles20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101222/giPlanFelles20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101222/giPlanBasis20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Dokument/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Dokument/Xml/Schema/20101222/giArkivDokument20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101222/giFellesKontakt20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101222/giFellesKodeliste20101222.xsd"/>
+	<xs:element name="AktoerListe" type="tns:AktoerListe"/>
+	<xs:complexType name="AktoerListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Aktoer" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Aktoer" type="tns:Aktoer"/>
+	<xs:complexType name="Aktoer">
+		<xs:sequence>
+			<xs:element name="rolle" type="tns:AktoerRollekode" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Kontakt" type="felleskontaktns:Kontakt" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AktoerRollekode" type="tns:AktoerRollekode"/>
+	<xs:complexType name="AktoerRollekode">
+		<xs:annotation>
+			<xs:documentation>FORSLST=Forslagsstiller
+    UTARBAV=Utarbeidet av
+    NABO=Nabo
+    TILTH=Tiltakshaver</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ArealbrukListe" type="tns:ArealbrukListe"/>
+	<xs:complexType name="ArealbrukListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Arealbruk" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Arealbruk" type="tns:Arealbruk"/>
+	<xs:complexType name="Arealbruk">
+		<xs:sequence>
+			<xs:element name="utnytting" type="tns:Utnytting" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Arealplan" type="tns:Arealplan"/>
+	<xs:complexType name="Arealplan">
+		<xs:complexContent>
+			<xs:extension base="planbasisns:ArealplanBase">
+				<xs:sequence>
+					<xs:element name="planbestemmelse" type="tns:Planbestemmelse" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>angir om plan har bestemmelser, i så fall om de er egen tekst, og om de er påført plankartet (pbl. § 20-4, 2. ledd bokstav a-h og § 26)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lovreferanse" type="tns:Lovreferanse" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>kode for hvilken lov planen er vedtatt etter
+      </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lovreferanseBeskrivelse" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>tekstlig beskrivelse av hvilken lov planen er vedtatt etter
+      </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="opprinneligPlanId" type="xs:string" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="opprinneligAdministrativEnhet" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="forslagsstiller" type="tns:Forslagsstiller" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="gjeldendePlanbestemmelseDokument" type="arkivdokumentns:Dokument" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="arealbruk" type="tns:Arealbruk" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DispensasjonListe" type="tns:DispensasjonListe"/>
+	<xs:complexType name="DispensasjonListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Dispensasjon" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Dispensasjon" type="tns:Dispensasjon"/>
+	<xs:complexType name="Dispensasjon">
+		<xs:sequence>
+			<xs:element name="arealplanId" type="planfellesns:NasjonalArealplanId" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="dispensasjonstype" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="dispensasjonFra" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="saksnummer" type="arkivfellesns:Saksnummer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="vedtaksDato" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="posisjon" type="fellesgeometrins:Punkt" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Forslagsstiller">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Privat"/>
+			<xs:enumeration value="Offentlig"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Lovreferanse" type="tns:Lovreferanse"/>
+	<xs:complexType name="Lovreferanse">
+		<xs:annotation>
+			<xs:documentation>kode for hvilken lov planen er vedtatt etter</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PlanbehandlingListe" type="tns:PlanbehandlingListe"/>
+	<xs:complexType name="PlanbehandlingListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Planbehandling" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Planbehandling" type="tns:Planbehandling"/>
+	<xs:complexType name="Planbehandling">
+		<xs:sequence>
+			<xs:element name="saksnummer" type="arkivfellesns:Saksnummer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="arealplanId" type="planfellesns:NasjonalArealplanId" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dokument" type="arkivdokumentns:Dokument" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Planbestemmelse" type="tns:Planbestemmelse"/>
+	<xs:complexType name="Planbestemmelse">
+		<xs:annotation>
+			<xs:documentation>angir om plan har bestemmelser, i så fall om de er egen tekst, og om de er påført plankartet (pbl. § 20-4, 2. ledd bokstav a-h og § 26)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PlanEndring" type="tns:PlanEndring"/>
+	<xs:complexType name="PlanEndring">
+		<xs:complexContent>
+			<xs:extension base="tns:Planbehandling">
+				<xs:sequence>
+					<xs:element name="typeEndring" type="tns:PlanEndringTypeKode" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="vedtaksDato" type="xs:date" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="posisjon" type="fellesgeometrins:Punkt" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PlanEndringTypeKode" type="tns:PlanEndringTypeKode"/>
+	<xs:complexType name="PlanEndringTypeKode">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PlanomraadeListe" type="tns:PlanomraadeListe"/>
+	<xs:complexType name="PlanomraadeListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Planomraade" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Planomraade" type="tns:Planomraade"/>
+	<xs:complexType name="Planomraade">
+		<xs:sequence>
+			<xs:element name="omriss" type="fellesgeometrins:Omraade" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="vertikalnivaa" type="tns:VertikalnivaaKode" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="arealplanId" type="planfellesns:NasjonalArealplanId" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Utnytting" type="tns:Utnytting"/>
+	<xs:complexType name="Utnytting">
+		<xs:sequence>
+			<xs:element name="utnyttingstype" type="tns:Utnyttingstype" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>type grad av utnytting (pbl. § 20-4, 2. ledd bokstav b og § 26, 1. ledd og forskrift TEK kap III)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="utnyttingstall" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tallverdi for grad av utnytting (pbl. § 20-4, 2. ledd bokstav b og § 26, 1. ledd og forskrift TEK kap III)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Utnyttingstype" type="tns:Utnyttingstype"/>
+	<xs:complexType name="Utnyttingstype">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="VertikalnivaaKode" type="tns:VertikalnivaaKode"/>
+	<xs:complexType name="VertikalnivaaKode">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

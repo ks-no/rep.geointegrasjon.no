@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.09.27" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.09.27" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.09.27" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.09.27" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.09.27" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2011.09.27" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2011.09.27" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.09.27" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.09.27" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.09.27" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2011.09.27" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.09.27" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2011.09.27" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.09.27" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.09.27" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.09.27" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.09.27" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2011.09.27" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.09.27" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.09.27" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.09.27" elementFormDefault="qualified" version="2011.09.27 - GeoIntegrasjon v1.1.0">
+	<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.09.27" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.09.27/giMatrikkelFelles20110927.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.09.27" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.09.27/giFellesGeometri20110927.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.09.27" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.09.27/giMatrikkelBasis20110927.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.09.27" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.09.27/giFellesKodeliste20110927.xsd"/>
+	<xs:element name="AnleggstypeKodeListe" type="tns:AnleggstypeKodeListe"/>
+	<xs:complexType name="AnleggstypeKodeListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:AnleggstypeKode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AnleggstypeKode" type="tns:AnleggstypeKode"/>
+	<xs:complexType name="AnleggstypeKode">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BruksenhetstypeKodeListe" type="tns:BruksenhetstypeKodeListe"/>
+	<xs:complexType name="BruksenhetstypeKodeListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:BruksenhetstypeKode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BruksenhetstypeKode" type="tns:BruksenhetstypeKode"/>
+	<xs:complexType name="BruksenhetstypeKode">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="EtasjeplanKodeListe" type="tns:EtasjeplanKodeListe"/>
+	<xs:complexType name="EtasjeplanKodeListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:EtasjeplanKode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="EtasjeplanKode" type="tns:EtasjeplanKode"/>
+	<xs:complexType name="EtasjeplanKode">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MediumKodeListe" type="tns:MediumKodeListe"/>
+	<xs:complexType name="MediumKodeListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:MediumKode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MediumKode" type="tns:MediumKode"/>
+	<xs:complexType name="MediumKode">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Anleggseiendom" type="tns:Anleggseiendom"/>
+	<xs:complexType name="Anleggseiendom">
+		<xs:complexContent>
+			<xs:extension base="matrikkelbasisns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="anleggstype" type="tns:AnleggstypeKode" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="AnleggsprojeksjonsflateListe" type="tns:AnleggsprojeksjonsflateListe"/>
+	<xs:complexType name="AnleggsprojeksjonsflateListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Anleggsprojeksjonsflate" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Anleggsprojeksjonsflate" type="tns:Anleggsprojeksjonsflate"/>
+	<xs:complexType name="Anleggsprojeksjonsflate">
+		<xs:sequence>
+			<xs:element name="anleggsprojeksjonsareal" type="xs:double" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="hovedflate" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="kommentar" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="medium" type="tns:MediumKode" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="omraade" type="fellesgeometrins:Flate" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="representasjonspunkt" type="matrikkelbasisns:Representasjonspunkt" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AnnenMatrikkelenhet" type="tns:AnnenMatrikkelenhet"/>
+	<xs:complexType name="AnnenMatrikkelenhet">
+		<xs:complexContent>
+			<xs:extension base="matrikkelbasisns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="annenMatrikkelenhetsType" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BruksenhetListe" type="tns:BruksenhetListe"/>
+	<xs:complexType name="BruksenhetListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Bruksenhet" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Bruksenhet" type="tns:Bruksenhet"/>
+	<xs:complexType name="Bruksenhet">
+		<xs:sequence>
+			<xs:element name="adresseIdent" type="matrikkelbasisns:AdresseIdent" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="bruksareal" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bruksenhetstype" type="tns:BruksenhetstypeKode" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="etasjeNummer" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="etasjeplan" type="tns:EtasjeplanKode" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="loepenummer" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="matrikkelNummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="EtasjeListe" type="tns:EtasjeListe"/>
+	<xs:complexType name="EtasjeListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Etasje" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Etasje" type="tns:Etasje"/>
+	<xs:complexType name="Etasje">
+		<xs:sequence>
+			<xs:element name="etasjeplan" type="tns:EtasjeplanKode" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="etasjeNummer" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bruksarealTilBolig" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bruksarealTilAnnet" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bruksarealTotalt" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bruttoarealTilBolig" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bruttoarealTilAnnet" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bruttoarealTotalt" type="xs:double" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Festegrunn" type="tns:Festegrunn"/>
+	<xs:complexType name="Festegrunn">
+		<xs:complexContent>
+			<xs:extension base="matrikkelbasisns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="punktfeste" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Grunneiendom" type="tns:Grunneiendom"/>
+	<xs:complexType name="Grunneiendom">
+		<xs:complexContent>
+			<xs:extension base="matrikkelbasisns:Matrikkelenhet">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="HovedAnleggsflate" type="tns:HovedAnleggsflate"/>
+	<xs:complexType name="HovedAnleggsflate">
+		<xs:complexContent>
+			<xs:extension base="tns:Anleggsprojeksjonsflate">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Hovedteig" type="tns:Hovedteig"/>
+	<xs:complexType name="Hovedteig">
+		<xs:complexContent>
+			<xs:extension base="tns:Teig">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Jordsameie" type="tns:Jordsameie"/>
+	<xs:complexType name="Jordsameie">
+		<xs:complexContent>
+			<xs:extension base="matrikkelbasisns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="avklartEiere" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="avklartAndeler" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Seksjon" type="tns:Seksjon"/>
+	<xs:complexType name="Seksjon">
+		<xs:complexContent>
+			<xs:extension base="matrikkelbasisns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="sameieBroek" type="matrikkelbasisns:Andel" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TeigListe" type="tns:TeigListe"/>
+	<xs:complexType name="TeigListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Teig" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Teig" type="tns:Teig"/>
+	<xs:complexType name="Teig">
+		<xs:sequence>
+			<xs:element name="avklartEiere" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="hovedteig" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="omraade" type="fellesgeometrins:Flate" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="representasjonspunkt" type="matrikkelbasisns:Representasjonspunkt" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="teigareal" type="xs:double" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="teigarealmerknad" type="matrikkelbasisns:ArealmerknadKodeListe" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="teigMedFlereMatrikkelenheter" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="tvist" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="uregistrertJordsameie" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

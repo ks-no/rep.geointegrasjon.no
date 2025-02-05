@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20100615" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:arkivindrekjernens="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615" elementFormDefault="qualified" version="20100615 - GeoIntegrasjon v1.0">
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20100615" schemaLocation="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20100615/giFellesPerson20100615.xsd"/>
+	<xs:element name="Adresse" type="tns:Adresse"/>
+	<xs:complexType name="Adresse">
+		<xs:sequence>
+			<xs:element name="gyldig" type="tns:Tidsperiode" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Dato" type="tns:Dato"/>
+	<xs:complexType name="Dato">
+		<xs:sequence>
+			<xs:element name="aar" type="xs:gYear" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ElektroniskAdresse" type="tns:ElektroniskAdresse"/>
+	<xs:complexType name="ElektroniskAdresse">
+		<xs:complexContent>
+			<xs:extension base="tns:Adresse">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Epostadresse" type="tns:Epostadresse"/>
+	<xs:complexType name="Epostadresse">
+		<xs:complexContent>
+			<xs:extension base="tns:ElektroniskAdresse">
+				<xs:sequence>
+					<xs:element name="epostadresse" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Faksnummer" type="tns:Faksnummer"/>
+	<xs:complexType name="Faksnummer">
+		<xs:complexContent>
+			<xs:extension base="tns:ElektroniskAdresse">
+				<xs:sequence>
+					<xs:element name="faksnummer" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Gateadresse" type="tns:Gateadresse"/>
+	<xs:complexType name="Gateadresse">
+		<xs:annotation>
+			<xs:documentation>Fra grunndatamodellen i SERES. Merk avvik: gateadresseid er tatt bort. I stedet tillates husnummer og bokstav i gatenavn</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Adresse">
+				<xs:sequence>
+					<xs:element name="gatenavn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="postadresse" type="tns:PostadministrativeOmraader" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Maaned" type="tns:Maaned"/>
+	<xs:complexType name="Maaned">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="PostadministrativeOmraader" type="tns:PostadministrativeOmraader"/>
+	<xs:complexType name="PostadministrativeOmraader">
+		<xs:annotation>
+			<xs:documentation>Fra grunndatamodellen i SERES</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="postnummer" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="poststed" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Telefonnummer" type="tns:Telefonnummer"/>
+	<xs:complexType name="Telefonnummer">
+		<xs:complexContent>
+			<xs:extension base="tns:ElektroniskAdresse">
+				<xs:sequence>
+					<xs:element name="telefonnummer" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Tidsperiode" type="tns:Tidsperiode"/>
+	<xs:complexType name="Tidsperiode">
+		<xs:sequence>
+			<xs:element name="fomDato" type="tns:Dato" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="tomDato" type="tns:Dato" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Maaned" type="tns:Maaned" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dag" type="tns:Dag" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

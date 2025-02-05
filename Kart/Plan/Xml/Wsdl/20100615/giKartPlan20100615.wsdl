@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="KartPlan" targetNamespace="http://rep.geointegrasjon.no/Kart/Plan/Xml/Wsdl/20100615" xmlns:tns="http://rep.geointegrasjon.no/Kart/Plan/Xml/Wsdl/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615 ">
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615/giPlanBasis20100615.xsd"/>
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615/giPlanUtvidet20100615.xsd"/>
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615/giPlanFelles20100615.xsd"/>
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615/giKartGeometri20100615.xsd"/>
+	<wsdl:types/>
+	<wsdl:message name="HentOmraadeRequest">
+		<wsdl:part name="sesjonsid" type="xs:string"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeResponse">
+		<wsdl:part name="return" type="kartgeometrins:Omraade"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForPlanRequest">
+		<wsdl:part name="planident" type="planfellesns:NasjonalArealplanId"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForPlanResponse">
+		<wsdl:part name="return" type="kartgeometrins:Omraade"/>
+	</wsdl:message>
+	<wsdl:message name="HentBboxForPlanRequest">
+		<wsdl:part name="planid" type="planfellesns:NasjonalArealplanId"/>
+	</wsdl:message>
+	<wsdl:message name="HentBboxForPlanResponse">
+		<wsdl:part name="return" type="kartgeometrins:Bbox"/>
+	</wsdl:message>
+	<wsdl:message name="HentPlanomraaderRequest">
+		<wsdl:part name="planid" type="planfellesns:NasjonalArealplanId"/>
+	</wsdl:message>
+	<wsdl:message name="HentPlanomraaderResponse">
+		<wsdl:part name="return" type="planutvidetns:Planomraade"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlanerForOmraadeRequest">
+		<wsdl:part name="planstatus" type="Planstatus[]"/>
+		<wsdl:part name="omraade" type="kartgeometrins:Omraade"/>
+	</wsdl:message>
+	<wsdl:message name="FinnPlanerForOmraadeResponse">
+		<wsdl:part name="return" type="planbasisns:ArealplanBase"/>
+	</wsdl:message>
+	<wsdl:portType name="Plankart">
+		<wsdl:operation name="FinnPlanerForOmraade">
+			<wsdl:input name="FinnPlanerForOmraadeRequestRequest" message="tns:FinnPlanerForOmraadeRequest"/>
+			<wsdl:output name="FinnPlanerForOmraadeRequestResponse" message="tns:FinnPlanerForOmraadeResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentPlanomraader">
+			<wsdl:input name="HentPlanomraaderRequestRequest" message="tns:HentPlanomraaderRequest"/>
+			<wsdl:output name="HentPlanomraaderRequestResponse" message="tns:HentPlanomraaderResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentBboxForPlan">
+			<wsdl:input name="HentBboxForPlanRequestRequest" message="tns:HentBboxForPlanRequest"/>
+			<wsdl:output name="HentBboxForPlanRequestResponse" message="tns:HentBboxForPlanResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentOmraadeForPlan">
+			<wsdl:input name="HentOmraadeForPlanRequestRequest" message="tns:HentOmraadeForPlanRequest"/>
+			<wsdl:output name="HentOmraadeForPlanRequestResponse" message="tns:HentOmraadeForPlanResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentOmraade">
+			<wsdl:input name="HentOmraadeRequestRequest" message="tns:HentOmraadeRequest"/>
+			<wsdl:output name="HentOmraadeRequestResponse" message="tns:HentOmraadeResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="Plankart" type="tns:Plankart">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="FinnPlanerForOmraade">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Plan/Xml/Wsdl/20100615/#FinnPlanerForOmraade" style="document"/>
+			<wsdl:input name="FinnPlanerForOmraadeRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnPlanerForOmraadeRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="HentPlanomraader">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Plan/Xml/Wsdl/20100615/#HentPlanomraader" style="document"/>
+			<wsdl:input name="HentPlanomraaderRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentPlanomraaderRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="HentBboxForPlan">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Plan/Xml/Wsdl/20100615/#HentBboxForPlan" style="document"/>
+			<wsdl:input name="HentBboxForPlanRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentBboxForPlanRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="HentOmraadeForPlan">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Plan/Xml/Wsdl/20100615/#HentOmraadeForPlan" style="document"/>
+			<wsdl:input name="HentOmraadeForPlanRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentOmraadeForPlanRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="HentOmraade">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Plan/Xml/Wsdl/20100615/#HentOmraade" style="document"/>
+			<wsdl:input name="HentOmraadeRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentOmraadeRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Plan">
+		<wsdl:port name="Plankart" binding="tns:Plankart">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

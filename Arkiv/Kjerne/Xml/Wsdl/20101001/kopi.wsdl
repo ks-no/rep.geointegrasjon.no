@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ArkivKjerne" targetNamespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101001" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101001" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20101001" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101001" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101001" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001 ">
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" location="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001/giFellesFeil20101001.xsd"/>
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" location="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001/giArkivKjerne20101001.xsd"/>
+	<wsdl:types/>
+	<wsdl:message name="NySaksmappeRequest">
+		<wsdl:part name="mappe" type="arkivkjernens:Saksmappe"/>
+	</wsdl:message>
+	<wsdl:message name="NySaksmappeResponse">
+		<wsdl:part name="return" type="arkivkjernens:Saksmappe"/>
+	</wsdl:message>
+	<wsdl:message name="NySaksmappeFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperRequest">
+		<wsdl:part name="returnerTilleggsinformasjon" type="xs:boolean"/>
+		<wsdl:part name="returnerSakspart" type="xs:boolean"/>
+		<wsdl:part name="returnerKlasse" type="xs:boolean"/>
+		<wsdl:part name="returnerJournalpost" type="xs:boolean"/>
+		<wsdl:part name="sok" type="arkivkjernens:SoekskriterieListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperResponse">
+		<wsdl:part name="return" type="arkivkjernens:SaksmappeListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperGittNoekkelRequest">
+		<wsdl:part name="nokkel" type="arkivkjernens:Saksnoekkel"/>
+		<wsdl:part name="returnerTilleggsinformasjon" type="xs:boolean"/>
+		<wsdl:part name="returnerSakspart" type="xs:boolean"/>
+		<wsdl:part name="returnerKlasse" type="xs:boolean"/>
+		<wsdl:part name="returnerJournalpost" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperGittNoekkelResponse">
+		<wsdl:part name="return" type="arkivkjernens:SaksmappeListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperGittNoekkelFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyJournalpostRequest">
+		<wsdl:part name="journalpost" type="arkivkjernens:Journalpost"/>
+	</wsdl:message>
+	<wsdl:message name="NyJournalpostResponse">
+		<wsdl:part name="return" type="arkivkjernens:Journalpost"/>
+	</wsdl:message>
+	<wsdl:message name="NyJournalpostFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterRequest">
+		<wsdl:part name="returnerTilleggsinformasjon" type="xs:boolean"/>
+		<wsdl:part name="returnerFil" type="xs:boolean"/>
+		<wsdl:part name="returnerDokument" type="xs:boolean"/>
+		<wsdl:part name="returnerAvsenderMottaker" type="xs:boolean"/>
+		<wsdl:part name="sok" type="arkivkjernens:SoekskriterieListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterResponse">
+		<wsdl:part name="return" type="arkivkjernens:JournalpostListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittNoekkelRequest">
+		<wsdl:part name="nokkel" type="arkivkjernens:Journpostnoekkel"/>
+		<wsdl:part name="returnerTilleggsinformasjon" type="xs:boolean"/>
+		<wsdl:part name="returnerFil" type="xs:boolean"/>
+		<wsdl:part name="returnerDokument" type="xs:boolean"/>
+		<wsdl:part name="returnerAvsenderMottaker" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittNoekkelResponse">
+		<wsdl:part name="return" type="arkivkjernens:JournalpostListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittNoekkelFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittSaksmappeNoekkelRequest">
+		<wsdl:part name="nokkel" type="arkivkjernens:Saksnoekkel"/>
+		<wsdl:part name="returnerTilleggsinformasjon" type="xs:boolean"/>
+		<wsdl:part name="returnerFil" type="xs:boolean"/>
+		<wsdl:part name="returnerDokument" type="xs:boolean"/>
+		<wsdl:part name="returnerAvsenderMottaker" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittSaksmappeNoekkelResponse">
+		<wsdl:part name="return" type="arkivkjernens:JournalpostListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittSaksmappeNoekkelFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterRequest">
+		<wsdl:part name="returnerFil" type="xs:boolean"/>
+		<wsdl:part name="sok" type="arkivkjernens:SoekskriterieListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterResponse">
+		<wsdl:part name="return" type="arkivkjernens:DokumentListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilRequest">
+		<wsdl:part name="dokid" type="arkivkjernens:SystemID"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilResponse">
+		<wsdl:part name="return" type="arkivkjernens:Fil"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:portType name="ArkivKjerne">
+		<wsdl:operation name="HentFil">
+			<wsdl:input name="HentFilRequestRequest" message="tns:HentFilRequest"/>
+			<wsdl:output name="HentFilRequestResponse" message="tns:HentFilResponse"/>
+			<wsdl:fault name="HentFilMessageFault" message="tns:HentFilFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenter">
+			<wsdl:input name="FinnDokumenterRequestRequest" message="tns:FinnDokumenterRequest"/>
+			<wsdl:output name="FinnDokumenterRequestResponse" message="tns:FinnDokumenterResponse"/>
+			<wsdl:fault name="FinnDokumenterMessageFault" message="tns:FinnDokumenterFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittSaksmappeNoekkel">
+			<wsdl:input name="FinnJournalposterGittSaksmappeNoekkelRequestRequest" message="tns:FinnJournalposterGittSaksmappeNoekkelRequest"/>
+			<wsdl:output name="FinnJournalposterGittSaksmappeNoekkelRequestResponse" message="tns:FinnJournalposterGittSaksmappeNoekkelResponse"/>
+			<wsdl:fault name="FinnJournalposterGittSaksmappeNoekkelMessageFault" message="tns:FinnJournalposterGittSaksmappeNoekkelFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittNoekkel">
+			<wsdl:input name="FinnJournalposterGittNoekkelRequestRequest" message="tns:FinnJournalposterGittNoekkelRequest"/>
+			<wsdl:output name="FinnJournalposterGittNoekkelRequestResponse" message="tns:FinnJournalposterGittNoekkelResponse"/>
+			<wsdl:fault name="FinnJournalposterGittNoekkelMessageFault" message="tns:FinnJournalposterGittNoekkelFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposter">
+			<wsdl:input name="FinnJournalposterRequestRequest" message="tns:FinnJournalposterRequest"/>
+			<wsdl:output name="FinnJournalposterRequestResponse" message="tns:FinnJournalposterResponse"/>
+			<wsdl:fault name="FinnJournalposterMessageFault" message="tns:FinnJournalposterFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyJournalpost">
+			<wsdl:input name="NyJournalpostRequestRequest" message="tns:NyJournalpostRequest"/>
+			<wsdl:output name="NyJournalpostRequestResponse" message="tns:NyJournalpostResponse"/>
+			<wsdl:fault name="NyJournalpostMessageFault" message="tns:NyJournalpostFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapperGittNoekkel">
+			<wsdl:input name="FinnSaksmapperGittNoekkelRequestRequest" message="tns:FinnSaksmapperGittNoekkelRequest"/>
+			<wsdl:output name="FinnSaksmapperGittNoekkelRequestResponse" message="tns:FinnSaksmapperGittNoekkelResponse"/>
+			<wsdl:fault name="FinnSaksmapperGittNoekkelMessageFault" message="tns:FinnSaksmapperGittNoekkelFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapper">
+			<wsdl:input name="FinnSaksmapperRequestRequest" message="tns:FinnSaksmapperRequest"/>
+			<wsdl:output name="FinnSaksmapperRequestResponse" message="tns:FinnSaksmapperResponse"/>
+			<wsdl:fault name="FinnSaksmapperMessageFault" message="tns:FinnSaksmapperFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="NySaksmappe">
+			<wsdl:input name="NySaksmappeRequestRequest" message="tns:NySaksmappeRequest"/>
+			<wsdl:output name="NySaksmappeRequestResponse" message="tns:NySaksmappeResponse"/>
+			<wsdl:fault name="NySaksmappeMessageFault" message="tns:NySaksmappeFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ArkivKjerne" type="tns:ArkivKjerne">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="HentFil">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#HentFil" style="document"/>
+			<wsdl:input name="HentFilRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentFilRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentFilMessageFault">
+				<soap:fault name="HentFilMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenter">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#FinnDokumenter" style="document"/>
+			<wsdl:input name="FinnDokumenterRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDokumenterRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnDokumenterMessageFault">
+				<soap:fault name="FinnDokumenterMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittSaksmappeNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#FinnJournalposterGittSaksmappeNoekkel" style="document"/>
+			<wsdl:input name="FinnJournalposterGittSaksmappeNoekkelRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterGittSaksmappeNoekkelRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterGittSaksmappeNoekkelMessageFault">
+				<soap:fault name="FinnJournalposterGittSaksmappeNoekkelMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#FinnJournalposterGittNoekkel" style="document"/>
+			<wsdl:input name="FinnJournalposterGittNoekkelRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterGittNoekkelRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterGittNoekkelMessageFault">
+				<soap:fault name="FinnJournalposterGittNoekkelMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposter">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#FinnJournalposter" style="document"/>
+			<wsdl:input name="FinnJournalposterRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterMessageFault">
+				<soap:fault name="FinnJournalposterMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyJournalpost">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#NyJournalpost" style="document"/>
+			<wsdl:input name="NyJournalpostRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NyJournalpostRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NyJournalpostMessageFault">
+				<soap:fault name="NyJournalpostMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapperGittNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#FinnSaksmapperGittNoekkel" style="document"/>
+			<wsdl:input name="FinnSaksmapperGittNoekkelRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnSaksmapperGittNoekkelRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnSaksmapperGittNoekkelMessageFault">
+				<soap:fault name="FinnSaksmapperGittNoekkelMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapper">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#FinnSaksmapper" style="document"/>
+			<wsdl:input name="FinnSaksmapperRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnSaksmapperRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnSaksmapperMessageFault">
+				<soap:fault name="FinnSaksmapperMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NySaksmappe">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Wsdl/20101001/#NySaksmappe" style="document"/>
+			<wsdl:input name="NySaksmappeRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="NySaksmappeRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NySaksmappeMessageFault">
+				<soap:fault name="NySaksmappeMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Kjerne">
+		<wsdl:port name="ArkivKjerne" binding="tns:ArkivKjerne">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

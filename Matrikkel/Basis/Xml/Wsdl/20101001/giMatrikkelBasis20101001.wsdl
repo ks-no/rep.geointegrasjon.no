@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MatrikkelBasis" targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001" xmlns:tns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101001" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101001" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20101001" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101001" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101001" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001 ">
+	<wsdl:types>
+ 		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001/giFellesFeil20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001/giMatrikkelFelles20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001/giFellesAdresse20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001/giFellesGeometri20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001/giFellesKodeliste20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001/giMatrikkelBasis20101001.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="HentMatrikkelenhetRequest">
+		<wsdl:part name="matrikkelNr" type="matrikkelfellesns:Matrikkelnummer">
+			<wsdl:documentation>Kommunenr/Gårdsnr/Bruksnr/Festenr/Seksjonsnr
+    Dersom man ikke søker etter fester / seksjoner settes disse til 0.</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerEier" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Eier.
+    True: returnerer assosiasjon Eier..
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentEiere.
+    Tidsbesparende dersom man ikke trenger hente dette.</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerAnleggsprojeksjonsflate" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Anleggsprojeksjonsflate.
+    True: returnerer assosiasjon Anleggsprojeksjonsflate.
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentAnleggsflaterForMatrikkelenhet.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    NB! Denne har kun betydning dersom Matrikkelenhet er av type Anleggseiendom.</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerTeig" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Teig
+    True: returnerer assosiasjon Teig
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentTeigerForMatrikkelenhet.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    </wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentMatrikkelenhetResponse">
+		<wsdl:part name="return" type="Matrikkelenhet"/>
+	</wsdl:message>
+	<wsdl:message name="HentMatrikkelenhetFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnVegerRequest">
+		<wsdl:part name="kommuneNr" type="xs:String">
+			<wsdl:documentation>Kommunenummer</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="delAvAdressenavn" type="xs:String">
+			<wsdl:documentation>Første del av adressenavn, eventuelt fullt adressenavn.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="FinnVegerResponse">
+		<wsdl:part name="return" type="StringListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnVegerFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForVegRequest">
+		<wsdl:part name="kommuneNr" type="xs:String">
+			<wsdl:documentation>Kommunenummer.</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="adresseNavn" type="xs:String">
+			<wsdl:documentation>Fullt veinavn.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForVegResponse">
+		<wsdl:part name="return" type="VegadresseListe"/>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForVegFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentByggRequest">
+		<wsdl:part name="bygningsID" type="matrikkelfellesns:BygningsId">
+			<wsdl:documentation>En entydig identifikasjon av bygningen. Bygningsnumrene er unike på landsbasis, og tildeles automatisk.
+    Består av bygningsNummer og endringsløpenummer.
+    Dersom det er en BygningsEndring, er endringsløpenummer satt til &gt; 0, ellers er den 0 For Bygning.</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerBruksenhet" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Bruksenheter.
+    True: returnerer assosiasjon Bruksenheter.
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentBruksenheterForBygg.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerEtasje" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Etasje
+    True: returnerer assosiasjon Etasje
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentEtasjerForBygg.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    </wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentByggResponse">
+		<wsdl:part name="return" type="Bygg"/>
+	</wsdl:message>
+	<wsdl:message name="HentByggFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentEiereRequest">
+		<wsdl:part name="matrikkelNr" type="matrikkelfellesns:Matrikkelnummer">
+			<wsdl:documentation>Kommunenr/Gårdsnr/Bruksnr/Festenr/Seksjonsnr
+    Dersom man ikke søker etter fester / seksjoner settes disse til 0.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentEiereResponse">
+		<wsdl:part name="return" type="EierListe"/>
+	</wsdl:message>
+	<wsdl:message name="HentEiereFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForMatrikkelenhetRequest">
+		<wsdl:part name="matrikkelNr" type="matrikkelfellesns:Matrikkelnummer">
+			<wsdl:documentation>Kommunenr/Gårdsnr/Bruksnr/Festenr/Seksjonsnr
+    Dersom man ikke søker etter fester / seksjoner settes disse til 0.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForMatrikkelenhetResponse">
+		<wsdl:part name="return" type="fellesadressens:AdresseListe"/>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForMatrikkelenhetFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentByggForMatrikkelenhetRequest">
+		<wsdl:part name="matrikkelNr" type="matrikkelfellesns:Matrikkelnummer">
+			<wsdl:documentation>Kommunenr/Gårdsnr/Bruksnr/Festenr/Seksjonsnr
+    Dersom man ikke søker etter fester / seksjoner settes disse til 0.</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerEtasje" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Etasje
+    True: returnerer assosiasjon Etasje
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentEtasjerForBygg.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerBruksenhet" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Bruksenheter.
+    True: returnerer assosiasjon Bruksenheter.
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentBruksenheterForBygg.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    </wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentByggForMatrikkelenhetResponse">
+		<wsdl:part name="return" type="Bygg"/>
+	</wsdl:message>
+	<wsdl:message name="HentByggForMatrikkelenhetFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenhetForAdresseRequest">
+		<wsdl:part name="adresse" type="fellesadressens:Adresse">
+			<wsdl:documentation>Merknad: Enten en Matrikkeladresse eller en Vegadresse</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenhetForAdresseResponse">
+		<wsdl:part name="return" type="matrikkelfellesns:Matrikkelnummer"/>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenhetForAdresseFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentByggForAdresseRequest">
+		<wsdl:part name="adresse" type="fellesadressens:Adresse">
+			<wsdl:documentation>Merknad: Enten en Matrikkeladresse eller en Vegadresse</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerBruksenhet" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Bruksenheter.
+    True: returnerer assosiasjon Bruksenheter.
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentBruksenheterForBygg.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnerEtasje" type="xs:boolean">
+			<wsdl:documentation>False: Returnerer ikke assosiasjon Etasje
+    True: returnerer assosiasjon Etasje
+    Hensikten med å sette denne til False, er for å kunne hente disse data senere vha. en operasjon, f.eks. HentEtasjerForBygg.
+    Tidsbesparende dersom man ikke trenger hente dette.
+    </wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentByggForAdresseResponse">
+		<wsdl:part name="return" type="ByggListe"/>
+	</wsdl:message>
+	<wsdl:message name="HentByggForAdresseFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForByggRequest">
+		<wsdl:part name="bygg" type="Bygg"/>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForByggResponse">
+		<wsdl:part name="return" type="fellesadressens:AdresseListe"/>
+	</wsdl:message>
+	<wsdl:message name="HentAdresserForByggFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenheterForByggRequest">
+		<wsdl:part name="byggningsId" type="matrikkelfellesns:BygningsId">
+			<wsdl:documentation>En entydig identifikasjon av bygningen. Bygningsnumrene er unike på landsbasis, og tildeles automatisk.
+    Består av bygningsNummer og endringsløpenummer.
+    Dersom det er en BygningsEndring, er endringsløpenummer satt til &gt; 0, ellers er den 0 For Bygning.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenheterForByggResponse">
+		<wsdl:part name="return" type="matrikkelfellesns:MatrikkelnummerListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenheterForByggFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkVegAdresseRequest">
+		<wsdl:part name="kommuneNummer" type="xs:String">
+			<wsdl:documentation>Kommunenummer</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="adressenavn" type="xs:String">
+			<wsdl:documentation>Fullt veinavn.</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="nummer" type="xs:Integer">
+			<wsdl:documentation>Husets nummer</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="bokstav" type="xs:String">
+			<wsdl:documentation>Husets bokstav. Denne kan være tom.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="SjekkVegAdresseResponse">
+		<wsdl:part name="return" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkVegAdresseFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkMatrikkelAdresseRequest">
+		<wsdl:part name="matrikkelAdresseId" type="MatrikkeladresseId">
+			<wsdl:documentation>Unik identifikasjon av en matrikkeladresse</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="SjekkMatrikkelAdresseResponse">
+		<wsdl:part name="return" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkMatrikkelAdresseFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkMatrikkelenhetRequest">
+		<wsdl:part name="matrikkelnr" type="matrikkelfellesns:Matrikkelnummer">
+			<wsdl:documentation>Kommunenr/Gårdsnr/Bruksnr/Festenr/Seksjonsnr
+    Dersom man ikke søker etter fester / seksjoner settes disse til 0.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="SjekkMatrikkelenhetResponse">
+		<wsdl:part name="return" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkMatrikkelenhetFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkBygningRequest">
+		<wsdl:part name="bygningsID" type="matrikkelfellesns:BygningsId">
+			<wsdl:documentation>En entydig identifikasjon av bygningen. Bygningsnumrene er unike på landsbasis, og tildeles automatisk.
+    Består av bygningsNummer og endringsløpenummer.
+    Dersom det er en BygningsEndring, er endringsløpenummer satt til &gt; 0, ellers er den 0 For Bygning.</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="SjekkBygningResponse">
+		<wsdl:part name="return" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="SjekkBygningFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisteRequest">
+		<wsdl:part name="Kodelistenavn" type="xs:String">
+			<wsdl:documentation>Klassenavn for kodeliste, f.eks BygningsstatusKode</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisteResponse">
+		<wsdl:part name="return" type="felleskodelistens:KodeListe"/>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisteFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentAlleKodelisterRequest"/>
+	<wsdl:message name="HentAlleKodelisterResponse">
+		<wsdl:part name="return" type="felleskodelistens:KodeListe"/>
+	</wsdl:message>
+	<wsdl:message name="HentAlleKodelisterFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentRettigheterRequest"/>
+	<wsdl:message name="HentRettigheterResponse">
+		<wsdl:part name="return" type="Rettigheter"/>
+	</wsdl:message>
+	<wsdl:message name="HentRettigheterFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="LogInnRequest">
+		<wsdl:part name="brukernavn" type="xs:String"/>
+		<wsdl:part name="passord" type="xs:String"/>
+		<wsdl:part name="kommuneNummer" type="xs:String"/>
+		<wsdl:part name="koordinatsystem" type="fellesgeometrins:KoordinatsystemKode"/>
+	</wsdl:message>
+	<wsdl:message name="LogInnResponse">
+		<wsdl:part name="return" type="xs:boolean"/>
+	</wsdl:message>
+	<wsdl:message name="LogInnFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:portType name="MatrikkelBasis">
+		<wsdl:operation name="LogInn">
+			<wsdl:input name="LogInnRequestRequest" message="tns:LogInnRequest"/>
+			<wsdl:output name="LogInnRequestResponse" message="tns:LogInnResponse"/>
+			<wsdl:fault name="LogInnMessageFault" message="tns:LogInnFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentRettigheter">
+			<wsdl:input name="HentRettigheterRequestRequest" message="tns:HentRettigheterRequest"/>
+			<wsdl:output name="HentRettigheterRequestResponse" message="tns:HentRettigheterResponse"/>
+			<wsdl:fault name="HentRettigheterMessageFault" message="tns:HentRettigheterFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentAlleKodelister">
+			<wsdl:input name="HentAlleKodelisterRequestRequest" message="tns:HentAlleKodelisterRequest"/>
+			<wsdl:output name="HentAlleKodelisterRequestResponse" message="tns:HentAlleKodelisterResponse"/>
+			<wsdl:fault name="HentAlleKodelisterMessageFault" message="tns:HentAlleKodelisterFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentKodeliste">
+			<wsdl:input name="HentKodelisteRequestRequest" message="tns:HentKodelisteRequest"/>
+			<wsdl:output name="HentKodelisteRequestResponse" message="tns:HentKodelisteResponse"/>
+			<wsdl:fault name="HentKodelisteMessageFault" message="tns:HentKodelisteFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkBygning">
+			<wsdl:input name="SjekkBygningRequestRequest" message="tns:SjekkBygningRequest"/>
+			<wsdl:output name="SjekkBygningRequestResponse" message="tns:SjekkBygningResponse"/>
+			<wsdl:fault name="SjekkBygningMessageFault" message="tns:SjekkBygningFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkMatrikkelenhet">
+			<wsdl:input name="SjekkMatrikkelenhetRequestRequest" message="tns:SjekkMatrikkelenhetRequest"/>
+			<wsdl:output name="SjekkMatrikkelenhetRequestResponse" message="tns:SjekkMatrikkelenhetResponse"/>
+			<wsdl:fault name="SjekkMatrikkelenhetMessageFault" message="tns:SjekkMatrikkelenhetFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkMatrikkelAdresse">
+			<wsdl:input name="SjekkMatrikkelAdresseRequestRequest" message="tns:SjekkMatrikkelAdresseRequest"/>
+			<wsdl:output name="SjekkMatrikkelAdresseRequestResponse" message="tns:SjekkMatrikkelAdresseResponse"/>
+			<wsdl:fault name="SjekkMatrikkelAdresseMessageFault" message="tns:SjekkMatrikkelAdresseFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkVegAdresse">
+			<wsdl:input name="SjekkVegAdresseRequestRequest" message="tns:SjekkVegAdresseRequest"/>
+			<wsdl:output name="SjekkVegAdresseRequestResponse" message="tns:SjekkVegAdresseResponse"/>
+			<wsdl:fault name="SjekkVegAdresseMessageFault" message="tns:SjekkVegAdresseFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnMatrikkelenheterForBygg">
+			<wsdl:input name="FinnMatrikkelenheterForByggRequestRequest" message="tns:FinnMatrikkelenheterForByggRequest"/>
+			<wsdl:output name="FinnMatrikkelenheterForByggRequestResponse" message="tns:FinnMatrikkelenheterForByggResponse"/>
+			<wsdl:fault name="FinnMatrikkelenheterForByggMessageFault" message="tns:FinnMatrikkelenheterForByggFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentAdresserForBygg">
+			<wsdl:input name="HentAdresserForByggRequestRequest" message="tns:HentAdresserForByggRequest"/>
+			<wsdl:output name="HentAdresserForByggRequestResponse" message="tns:HentAdresserForByggResponse"/>
+			<wsdl:fault name="HentAdresserForByggMessageFault" message="tns:HentAdresserForByggFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentByggForAdresse">
+			<wsdl:input name="HentByggForAdresseRequestRequest" message="tns:HentByggForAdresseRequest"/>
+			<wsdl:output name="HentByggForAdresseRequestResponse" message="tns:HentByggForAdresseResponse"/>
+			<wsdl:fault name="HentByggForAdresseMessageFault" message="tns:HentByggForAdresseFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnMatrikkelenhetForAdresse">
+			<wsdl:input name="FinnMatrikkelenhetForAdresseRequestRequest" message="tns:FinnMatrikkelenhetForAdresseRequest"/>
+			<wsdl:output name="FinnMatrikkelenhetForAdresseRequestResponse" message="tns:FinnMatrikkelenhetForAdresseResponse"/>
+			<wsdl:fault name="FinnMatrikkelenhetForAdresseMessageFault" message="tns:FinnMatrikkelenhetForAdresseFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentByggForMatrikkelenhet">
+			<wsdl:input name="HentByggForMatrikkelenhetRequestRequest" message="tns:HentByggForMatrikkelenhetRequest"/>
+			<wsdl:output name="HentByggForMatrikkelenhetRequestResponse" message="tns:HentByggForMatrikkelenhetResponse"/>
+			<wsdl:fault name="HentByggForMatrikkelenhetMessageFault" message="tns:HentByggForMatrikkelenhetFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentAdresserForMatrikkelenhet">
+			<wsdl:input name="HentAdresserForMatrikkelenhetRequestRequest" message="tns:HentAdresserForMatrikkelenhetRequest"/>
+			<wsdl:output name="HentAdresserForMatrikkelenhetRequestResponse" message="tns:HentAdresserForMatrikkelenhetResponse"/>
+			<wsdl:fault name="HentAdresserForMatrikkelenhetMessageFault" message="tns:HentAdresserForMatrikkelenhetFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentEiere">
+			<wsdl:input name="HentEiereRequestRequest" message="tns:HentEiereRequest"/>
+			<wsdl:output name="HentEiereRequestResponse" message="tns:HentEiereResponse"/>
+			<wsdl:fault name="HentEiereMessageFault" message="tns:HentEiereFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentBygg">
+			<wsdl:input name="HentByggRequestRequest" message="tns:HentByggRequest"/>
+			<wsdl:output name="HentByggRequestResponse" message="tns:HentByggResponse"/>
+			<wsdl:fault name="HentByggMessageFault" message="tns:HentByggFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentAdresserForVeg">
+			<wsdl:input name="HentAdresserForVegRequestRequest" message="tns:HentAdresserForVegRequest"/>
+			<wsdl:output name="HentAdresserForVegRequestResponse" message="tns:HentAdresserForVegResponse"/>
+			<wsdl:fault name="HentAdresserForVegMessageFault" message="tns:HentAdresserForVegFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnVeger">
+			<wsdl:input name="FinnVegerRequestRequest" message="tns:FinnVegerRequest"/>
+			<wsdl:output name="FinnVegerRequestResponse" message="tns:FinnVegerResponse"/>
+			<wsdl:fault name="FinnVegerMessageFault" message="tns:FinnVegerFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentMatrikkelenhet">
+			<wsdl:input name="HentMatrikkelenhetRequestRequest" message="tns:HentMatrikkelenhetRequest"/>
+			<wsdl:output name="HentMatrikkelenhetRequestResponse" message="tns:HentMatrikkelenhetResponse"/>
+			<wsdl:fault name="HentMatrikkelenhetMessageFault" message="tns:HentMatrikkelenhetFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MatrikkelBasis" type="tns:MatrikkelBasis">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="LogInn">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#LogInn" style="document"/>
+			<wsdl:input name="LogInnRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="LogInnRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="LogInnMessageFault">
+				<soap:fault name="LogInnMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentRettigheter">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentRettigheter" style="document"/>
+			<wsdl:input name="HentRettigheterRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentRettigheterRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentRettigheterMessageFault">
+				<soap:fault name="HentRettigheterMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentAlleKodelister">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentAlleKodelister" style="document"/>
+			<wsdl:input name="HentAlleKodelisterRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentAlleKodelisterRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentAlleKodelisterMessageFault">
+				<soap:fault name="HentAlleKodelisterMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentKodeliste">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentKodeliste" style="document"/>
+			<wsdl:input name="HentKodelisteRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentKodelisteRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentKodelisteMessageFault">
+				<soap:fault name="HentKodelisteMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkBygning">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#SjekkBygning" style="document"/>
+			<wsdl:input name="SjekkBygningRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SjekkBygningRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SjekkBygningMessageFault">
+				<soap:fault name="SjekkBygningMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkMatrikkelenhet">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#SjekkMatrikkelenhet" style="document"/>
+			<wsdl:input name="SjekkMatrikkelenhetRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SjekkMatrikkelenhetRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SjekkMatrikkelenhetMessageFault">
+				<soap:fault name="SjekkMatrikkelenhetMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkMatrikkelAdresse">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#SjekkMatrikkelAdresse" style="document"/>
+			<wsdl:input name="SjekkMatrikkelAdresseRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SjekkMatrikkelAdresseRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SjekkMatrikkelAdresseMessageFault">
+				<soap:fault name="SjekkMatrikkelAdresseMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SjekkVegAdresse">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#SjekkVegAdresse" style="document"/>
+			<wsdl:input name="SjekkVegAdresseRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SjekkVegAdresseRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="SjekkVegAdresseMessageFault">
+				<soap:fault name="SjekkVegAdresseMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnMatrikkelenheterForBygg">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#FinnMatrikkelenheterForBygg" style="document"/>
+			<wsdl:input name="FinnMatrikkelenheterForByggRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnMatrikkelenheterForByggRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnMatrikkelenheterForByggMessageFault">
+				<soap:fault name="FinnMatrikkelenheterForByggMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentAdresserForBygg">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentAdresserForBygg" style="document"/>
+			<wsdl:input name="HentAdresserForByggRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentAdresserForByggRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentAdresserForByggMessageFault">
+				<soap:fault name="HentAdresserForByggMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentByggForAdresse">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentByggForAdresse" style="document"/>
+			<wsdl:input name="HentByggForAdresseRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentByggForAdresseRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentByggForAdresseMessageFault">
+				<soap:fault name="HentByggForAdresseMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnMatrikkelenhetForAdresse">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#FinnMatrikkelenhetForAdresse" style="document"/>
+			<wsdl:input name="FinnMatrikkelenhetForAdresseRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnMatrikkelenhetForAdresseRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnMatrikkelenhetForAdresseMessageFault">
+				<soap:fault name="FinnMatrikkelenhetForAdresseMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentByggForMatrikkelenhet">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentByggForMatrikkelenhet" style="document"/>
+			<wsdl:input name="HentByggForMatrikkelenhetRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentByggForMatrikkelenhetRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentByggForMatrikkelenhetMessageFault">
+				<soap:fault name="HentByggForMatrikkelenhetMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentAdresserForMatrikkelenhet">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentAdresserForMatrikkelenhet" style="document"/>
+			<wsdl:input name="HentAdresserForMatrikkelenhetRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentAdresserForMatrikkelenhetRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentAdresserForMatrikkelenhetMessageFault">
+				<soap:fault name="HentAdresserForMatrikkelenhetMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentEiere">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentEiere" style="document"/>
+			<wsdl:input name="HentEiereRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentEiereRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentEiereMessageFault">
+				<soap:fault name="HentEiereMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentBygg">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentBygg" style="document"/>
+			<wsdl:input name="HentByggRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentByggRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentByggMessageFault">
+				<soap:fault name="HentByggMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentAdresserForVeg">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentAdresserForVeg" style="document"/>
+			<wsdl:input name="HentAdresserForVegRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentAdresserForVegRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentAdresserForVegMessageFault">
+				<soap:fault name="HentAdresserForVegMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnVeger">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#FinnVeger" style="document"/>
+			<wsdl:input name="FinnVegerRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnVegerRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnVegerMessageFault">
+				<soap:fault name="FinnVegerMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentMatrikkelenhet">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Wsdl/20101001/#HentMatrikkelenhet" style="document"/>
+			<wsdl:input name="HentMatrikkelenhetRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentMatrikkelenhetRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentMatrikkelenhetMessageFault">
+				<soap:fault name="HentMatrikkelenhetMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Basis">
+		<wsdl:port name="MatrikkelBasis" binding="tns:MatrikkelBasis">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

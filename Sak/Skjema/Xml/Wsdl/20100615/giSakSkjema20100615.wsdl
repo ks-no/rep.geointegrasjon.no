@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SakSkjema" targetNamespace="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Wsdl/20100615" xmlns:tns="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Wsdl/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:arkivindrekjernens="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615 ">
+	<wsdl:types/>
+	<wsdl:message name="NyttSkjemaRequest">
+		<wsdl:part name="skjema" type="xs:base64Binary"/>
+	</wsdl:message>
+	<wsdl:portType name="SkjemaMottak">
+		<wsdl:documentation>
+				Samlingen med informasjon som utgjør søknaden.
+				Informasjonen er delt i to elementer; ett for
+				fagsystemdata, som skal benyttes av fagsystem for å
+				registrere og behandle søknaden, og ett for arkivdata.
+				Arkivdata kan benyttes i integrasjoner uten fagsystem,
+				og hvor mellomvare er involvert i ruting og arkivering
+				av informasjonen. Elementet har også en attributtsamling
+				i samsvar med "KS_Skjema-XML_1.01.pdf" (avsnitt 6).
+				Arkivdata seksjonen benyttes også for å transportere
+				filvedlegg slik som f.eks PDF versjoner av den utfylte
+				søknaden. Det stilles derfor ikke krav til riktig
+				utformet arkivdata struktur i henhold til noark4
+				webservices.
+			</wsdl:documentation>
+		<wsdl:operation name="NyttSkjema">
+			<wsdl:input name="NyttSkjemaRequestRequest" message="tns:NyttSkjemaRequest"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SkjemaMottak" type="tns:SkjemaMottak">
+		<wsdl:documentation>
+				Samlingen med informasjon som utgjør søknaden.
+				Informasjonen er delt i to elementer; ett for
+				fagsystemdata, som skal benyttes av fagsystem for å
+				registrere og behandle søknaden, og ett for arkivdata.
+				Arkivdata kan benyttes i integrasjoner uten fagsystem,
+				og hvor mellomvare er involvert i ruting og arkivering
+				av informasjonen. Elementet har også en attributtsamling
+				i samsvar med "KS_Skjema-XML_1.01.pdf" (avsnitt 6).
+				Arkivdata seksjonen benyttes også for å transportere
+				filvedlegg slik som f.eks PDF versjoner av den utfylte
+				søknaden. Det stilles derfor ikke krav til riktig
+				utformet arkivdata struktur i henhold til noark4
+				webservices.
+			</wsdl:documentation>
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="NyttSkjema">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Wsdl/20100615/#NyttSkjema" style="document"/>
+			<wsdl:input name="NyttSkjemaRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Skjema">
+		<wsdl:port name="SkjemaMottak" binding="tns:SkjemaMottak">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

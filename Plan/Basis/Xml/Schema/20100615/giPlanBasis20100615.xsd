@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:arkivindrekjernens="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615" elementFormDefault="qualified" version="20100615 - GeoIntegrasjon v1.0">
+	<xs:import namespace="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615/giPlanFelles20100615.xsd"/>
+	<xs:element name="ArealplanBase" type="tns:ArealplanBase"/>
+	<xs:complexType name="ArealplanBase">
+		<xs:sequence>
+			<xs:element name="arealplanId" type="planfellesns:NasjonalArealplanId" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>entydig identifikasjon for en plan innen en kommune eller et fylke (pbl. § 19-1, 6. ledd, § 20-1, 2. ledd og 5. ledd og § 22 og § 28-2)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plannavn" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>planens navn (pbl. § 19-1, 6. ledd, § 20-1, 2. ledd og 5. ledd og § 22 og § 28-2)
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="planType" type="tns:Plantype" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="planstatus" type="tns:Planstatus" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="vedtaksDato" type="xs:date" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Planstatus" type="tns:Planstatus"/>
+	<xs:complexType name="Planstatus">
+		<xs:annotation>
+			<xs:documentation>planens behandling (pbl. §§ 19-4, 20-5, 27-1, 27-2, 28-1 og 28-2) samt planens virkning (pbl. §§ 19-6, 20-6, 28-2 og 31)
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="planstatusKode" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="planstatusBeskrivelse" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Plantype" type="tns:Plantype"/>
+	<xs:complexType name="Plantype">
+		<xs:annotation>
+			<xs:documentation>type plan (pbl. § 19-1, 6. ledd, § 20-1, 2. ledd og 5. ledd og § 22 og § 28-2)
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plantypeKode" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="plantypeBeskrivelse" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

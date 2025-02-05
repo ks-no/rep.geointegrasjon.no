@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101222" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101222" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101222" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101222" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101222" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101222" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101222" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101222" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101222" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/Xml/Schema/20101222" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101222" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101222" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101222" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101222" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/Xml/Schema/20101222" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101222" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101222" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101222" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101222" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101222" elementFormDefault="qualified" version="20101222 - GeoIntegrasjon v0.97">
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101222/giFellesKontakt20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101222/giFellesGeometri20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101222/giMatrikkelFelles20101222.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101222" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101222/giFellesKodeliste20101222.xsd"/>
+	<xs:element name="AdresseListe" type="tns:AdresseListe"/>
+	<xs:complexType name="AdresseListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Adresse" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Adresse" type="tns:Adresse"/>
+	<xs:complexType name="Adresse" abstract="true">
+		<xs:sequence>
+			<xs:element name="representasjonspunkt" type="tns:Representasjonspunkt" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="postnr" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="poststed" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ByggListe" type="tns:ByggListe"/>
+	<xs:complexType name="ByggListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Bygg" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Bygg" type="tns:Bygg"/>
+	<xs:complexType name="Bygg">
+		<xs:annotation>
+			<xs:documentation>Supertype som realiseres gjennom Bygning og Bygningsendring.
+    Omfatter bygninger og bygningsendringer.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bygningId" type="matrikkelfellesns:BygningsId" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Byggets nummer; del av logisk ident som sammen med løpenr er unik på landsbasis. Tildeles automatisk. 
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bygningsStatus" type="tns:BygningsstatusKode" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>For å ta vare på bygningens nåværende status. I spesielle tilfeller kan et bygg få igangsettingstillatelse og ferdigattest for en del av bygget, og så igangsettingstillatelse for en annen del.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="naeringsgruppe" type="tns:NaeringsgruppeKode" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hvilken næringsgruppe som opptar størst andel av samlet areal i bygget.
+      Unntak: Dersom bolig er kombinert med annen næring skal bygget ikke gis næringsgruppe bolig.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bebygdAreal" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Grunnflaten av bygningen. Det vil si det arealet bygget tar av eiendommen det står på. 
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="etasjeData" type="tns:Etasjedata" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>angir summen av informasjonen på de enkelte bruksrenhetene i etasjene.  Gir totalen for alle etasjoene.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kommunenummer" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>nummerering av kommuner i henhold til SSB sin offisielle liste.  Inneholder også utgåtte kommuner.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Bygning" type="tns:Bygning"/>
+	<xs:complexType name="Bygning">
+		<xs:annotation>
+			<xs:documentation>Realisasjon av Bygg.  
+    Bygning omfatter det som i GAB ble kalt hovedbygg. Dette er det opprinnelige bygget inkludert eventuelle bygningsendringer
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Bygg">
+				<xs:sequence>
+					<xs:element name="bygningsType" type="tns:BygningstypeKode" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Bygningens bygningstype
+      </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="representasjonspunkt" type="tns:Representasjonspunkt" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Bygningsendring" type="tns:Bygningsendring" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BygningsendringListe" type="tns:BygningsendringListe"/>
+	<xs:complexType name="BygningsendringListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Bygningsendring" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Bygningsendring" type="tns:Bygningsendring"/>
+	<xs:complexType name="Bygningsendring">
+		<xs:annotation>
+			<xs:documentation>Realisasjon av Bygg som omfattter endringer i form av tilbygg, påbygg, underbygg eller ombygginger. Bygningsendringer føres inn fortløpende med løpenummer, og type bygningsendring går fram av matrikkelen i de enkelte tilfeller.
+    
+    
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Bygg">
+				<xs:sequence>
+					<xs:element name="bygningsendringsType" type="tns:BygningsendringsKode" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Hvordan bygningsendringen er bygget i forhold til bygningen</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="representasjonspunkt" type="tns:Representasjonspunkt" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="EierListe" type="tns:EierListe"/>
+	<xs:complexType name="EierListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Eier" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Eier" type="tns:Eier"/>
+	<xs:complexType name="Eier">
+		<xs:sequence>
+			<xs:element name="eierforhold" type="tns:EierforholdKode" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Også kalt rolle
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="andel" type="tns:Andel" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Andelsbrøk for det eierforholdets andel i matrikkelenheten.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Matrikkeladresse" type="tns:Matrikkeladresse"/>
+	<xs:complexType name="Matrikkeladresse">
+		<xs:complexContent>
+			<xs:extension base="tns:Adresse">
+				<xs:sequence>
+					<xs:element name="matrikkelnummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>et av de matrikkelnummere som adressen er knyttet til
+      
+      Merknad: Regler for hvilke matrikkelnummer som skal benyttes er spesifert i matrikkelen. Vanligvis det laveste nummer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="undernummer" type="xs:integer" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>nummerering av adressene under samme gårdsnr/bruksnr/festenr</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MatrikkelenhetListe" type="tns:MatrikkelenhetListe"/>
+	<xs:complexType name="MatrikkelenhetListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Matrikkelenhet" type="tns:Matrikkelenhet"/>
+	<xs:complexType name="Matrikkelenhet">
+		<xs:annotation>
+			<xs:documentation>Samlebegrep for de fem typene eiendomsenheter som registreres med eget matrikkelnummer i matrikkelen. Det nummeret som identifiserer disse enhetene kalles matrikkelnummer og består av gårdsnummer og bruksnummer, eventuelt med tillegg av feste- og eller seksjonsnummer. De fem matrikkelenhetstypene er: Grunneiendom, festegrunn, eierseksjon, anleggseiendom og jordsameie.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="matrikkelNummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="matrikkelenhetstype" type="tns:EiendomstypeKode" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="tinglyst" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Om matrikkelenheten er tinglyst eller ikke. At den er tinglyst kommer fra Tinglysingssystemet.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="utgaatt" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Om matrikkelenheten er utgått, f.eks. ved sammenføyning. Årsaken til at matrikkelenheten er utgått kan finnes fra forretningene.
+      Utgått ved sammenføyning = Det vil finnes en sammenslåingsforretning hvor matrikkelenheten er avgiver.
+      Ommatrikulert = Det vil finnes en ommatrikuleringsforretning hvor matrikkelenheten er avgiver.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="erSeksjonert" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Om matrikkelenheten er seksjonert.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bruksnavn" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>bruksnavn for matrikkelenheten
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="areal" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Areal (til matrikkelenhet): Sum av alle teigarealer til aktuell matrikkelenhet.
+      Kun sum av &amp;rdquo;rene&amp;rdquo; teiger.
+      Med ren teig menes her at teigen ikke er teig med flere matrikkelenheter, -er uregistrert jordsameie eller er i tvist.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="harArealmerknad" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>True: Varsel om at det er knyttet usikkerhet til arealet som oppgis på Matrikkelenheten
+      False: Arealet er pålitelig / sikkert.
+      
+      Presisering:
+      Hvis noen av matrikkelenhetens &amp;rdquo;rene&amp;rdquo; teiger har angitt en teigarealmerknad (med unntak av Teigarealmerknad Teigdeler), settes Arealmerknad = True. 
+      Med &amp;rdquo;ren&amp;rdquo; teig menes her at teigen ikke er teig med flere matrikkelenheter, -er uregistrert jordsameie eller er i tvist. 
+      Hvis noen av Matrikkelenhetens teiger ikke er &amp;rdquo;rene&amp;rdquo;, settes også egenskapen Arealmerknad til True(?)
+      Hvis Matrikkelenheten kun består av &amp;rdquo;rene&amp;rdquo; teiger og disse teigene ikke har noen arealmerknad (eller arealmerknaden er Teigdeler) settes Arealmerknad til False (ingen merknad til arealet).
+      Matrikkelenheter med bare anleggsprojeksjonsflater får oppgitt anleggsprojeksjonsareal, ikke areal.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="harAktiveFestegrunner" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>flagg som angir om matrikkelenheten har aktive festegrunner eller ikke.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="representasjonspunkt" type="tns:Representasjonspunkt" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Dersom flere teiger, hentes representasjonspunkt for hovedteig
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Eier" type="tns:Eier" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Representasjonspunkt" type="tns:Representasjonspunkt"/>
+	<xs:complexType name="Representasjonspunkt">
+		<xs:sequence>
+			<xs:element name="punkt" type="fellesgeometrins:Koordinat" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="koordinatsystem" type="fellesgeometrins:KoordinatsystemKode" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VegadresseListe" type="tns:VegadresseListe"/>
+	<xs:complexType name="VegadresseListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Vegadresse" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Vegadresse" type="tns:Vegadresse"/>
+	<xs:complexType name="Vegadresse">
+		<xs:complexContent>
+			<xs:extension base="tns:Adresse">
+				<xs:sequence>
+					<xs:element name="adressenavn" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>navn på gate, veg, sti, plass eller område som ført i matrikkelen.  (matrikkelforskriften § 2e)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Del av adressenummer som er definert slik i matrikkelforskrift:
+      et nummer og en eventuell bokstav (husnummer) som entydig identifiserer eiendommer, anlegg, bygninger eller innganger til bygninger innenfor en adresserbar gate, veg, sti, plass eller område (Forskrift § 2f).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="bokstav" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>del av adressenummer.
+      Ved behov kan det i tillegg til tallet brukes en etterfølgende bokstav. Bokstav skal bare brukes for å unngå omnummerering i tidligere tildelte adresser. Bokstav skal gis i alfabetisk rekkefølge. (matrikkelforskrift § 52 tredje ledd).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="kommunenummer" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ArealmerknadKode" type="tns:ArealmerknadKode"/>
+	<xs:complexType name="ArealmerknadKode">
+		<xs:annotation>
+			<xs:documentation>Kodeliste med mulige merknader til arealet for teig. Beregnes ut fra HjelpelinjetypeKode for teigens teiggrenser.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BygningsendringsKode" type="tns:BygningsendringsKode"/>
+	<xs:complexType name="BygningsendringsKode">
+		<xs:annotation>
+			<xs:documentation>Hvordan bygningsendringen er bygget i forhold til bygningen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="EiendomstypeKode" type="tns:EiendomstypeKode"/>
+	<xs:complexType name="EiendomstypeKode">
+		<xs:annotation>
+			<xs:documentation>Type matrikkelenhet.
+    De fem matrikkelenhetstypene er: Grunneiendom, festegrunn, eierseksjon, anleggseiendom og jordsameie.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BygningsstatusKode" type="tns:BygningsstatusKode"/>
+	<xs:complexType name="BygningsstatusKode">
+		<xs:annotation>
+			<xs:documentation>Lovlige statuser for bygningstiltak.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BygningstypeKode" type="tns:BygningstypeKode"/>
+	<xs:complexType name="BygningstypeKode">
+		<xs:annotation>
+			<xs:documentation>Koder for hva bygget er brukt til.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="NaeringsgruppeKode" type="tns:NaeringsgruppeKode"/>
+	<xs:complexType name="NaeringsgruppeKode">
+		<xs:annotation>
+			<xs:documentation>Lovlige næringsgrupper som bygg kan brukes til.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="EierforholdKode" type="tns:EierforholdKode"/>
+	<xs:complexType name="EierforholdKode">
+		<xs:annotation>
+			<xs:documentation>Type eierforhold som kommer fra Tinglysingssystemet eller ved registrering i matrikkelen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="KommuneKode" type="tns:KommuneKode"/>
+	<xs:complexType name="KommuneKode">
+		<xs:annotation>
+			<xs:documentation>Kommunenummer og kommunenavn
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Andel" type="tns:Andel"/>
+	<xs:complexType name="Andel">
+		<xs:annotation>
+			<xs:documentation>brøk som beskriver eierandel.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="teller" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Teller i andelsbrøk.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nevner" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>nevner i andelsbrøk.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Etasjedata" type="tns:Etasjedata"/>
+	<xs:complexType name="Etasjedata">
+		<xs:annotation>
+			<xs:documentation>summering av etasjeinformasjon for et bygg.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sumAntallBoenheter" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>sum antall boenheter på bygning</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sumBruksarealTilBolig" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>sum bruksareal til bolig på bygning</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sumBruksarealTilAnnet" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>sum bruksareal til annet enn bolig på bygning</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sumBruksarealTotalt" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>sum totalt bruksareal på bygning</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sumAlternativtAreal" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>sum alternativt areal på bygning</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sumAlternativtAreal2" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>sum alternativt areal2 på bygning</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MatrikkeladresseId" type="tns:MatrikkeladresseId"/>
+	<xs:complexType name="MatrikkeladresseId">
+		<xs:annotation>
+			<xs:documentation>unik identifikasjon av en matrikkeladresse</xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Rettigheter" type="tns:Rettigheter"/>
+	<xs:complexType name="Rettigheter">
+		<xs:annotation>
+			<xs:documentation>Datatypen inneholder rettighetsflagg.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="harLesEierforholdRettighet" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>True: man kan lese eierforhold
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="harLesFnrRettighet" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>True: dersom man kan se fødselsnummer.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="KontaktEier" type="tns:KontaktEier"/>
+	<xs:complexType name="KontaktEier">
+		<xs:complexContent>
+			<xs:extension base="tns:Eier">
+				<xs:sequence>
+					<xs:element name="kontakt" type="felleskontaktns:Kontakt" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MatrikkelEier" type="tns:MatrikkelEier"/>
+	<xs:complexType name="MatrikkelEier">
+		<xs:complexContent>
+			<xs:extension base="tns:Eier">
+				<xs:sequence>
+					<xs:element name="matrikkelNummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

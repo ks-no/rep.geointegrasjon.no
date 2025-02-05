@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="KartMatrikkel" targetNamespace="http://rep.geointegrasjon.no/Kart/Matrikkel/Xml/Wsdl/20100615" xmlns:tns="http://rep.geointegrasjon.no/Kart/Matrikkel/Xml/Wsdl/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615 ">
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615/giMatrikkelBasis20100615.xsd"/>
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615/giMatrikkelFelles20100615.xsd"/>
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615/giKartGeometri20100615.xsd"/>
+	<wsdl:types/>
+	<wsdl:message name="FinnMatrikkelenheterForOmraadeRequest">
+		<wsdl:part name="selectionPolygon" type="Koordinat[]"/>
+		<wsdl:part name="koordinatsystem" type="kartgeometrins:KoordinatsystemKode"/>
+	</wsdl:message>
+	<wsdl:message name="FinnMatrikkelenheterForOmraadeResponse">
+		<wsdl:part name="return" type="matrikkelfellesns:Matrikkelnr"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForMatrikkelenhetRequest">
+		<wsdl:part name="matrikkelnr" type="matrikkelfellesns:Matrikkelnr"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForMatrikkelenhetResponse">
+		<wsdl:part name="return" type="kartgeometrins:Omraade"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForAdresseRequest">
+		<wsdl:part name="adresseIdent" type="MatrikkeladresseId"/>
+	</wsdl:message>
+	<wsdl:message name="HentOmraadeForAdresseResponse">
+		<wsdl:part name="return" type="kartgeometrins:Omraade"/>
+	</wsdl:message>
+	<wsdl:portType name="Matrikkelkart">
+		<wsdl:operation name="HentOmraadeForAdresse">
+			<wsdl:input name="HentOmraadeForAdresseRequestRequest" message="tns:HentOmraadeForAdresseRequest"/>
+			<wsdl:output name="HentOmraadeForAdresseRequestResponse" message="tns:HentOmraadeForAdresseResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentOmraadeForMatrikkelenhet">
+			<wsdl:input name="HentOmraadeForMatrikkelenhetRequestRequest" message="tns:HentOmraadeForMatrikkelenhetRequest"/>
+			<wsdl:output name="HentOmraadeForMatrikkelenhetRequestResponse" message="tns:HentOmraadeForMatrikkelenhetResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnMatrikkelenheterForOmraade">
+			<wsdl:input name="FinnMatrikkelenheterForOmraadeRequestRequest" message="tns:FinnMatrikkelenheterForOmraadeRequest"/>
+			<wsdl:output name="FinnMatrikkelenheterForOmraadeRequestResponse" message="tns:FinnMatrikkelenheterForOmraadeResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="Matrikkelkart" type="tns:Matrikkelkart">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="HentOmraadeForMatrikkelenhet">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Matrikkel/Xml/Wsdl/20100615/#HentOmraadeForMatrikkelenhet" style="document"/>
+			<wsdl:input name="HentOmraadeForMatrikkelenhetRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentOmraadeForMatrikkelenhetRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="FinnMatrikkelenheterForOmraade">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Matrikkel/Xml/Wsdl/20100615/#FinnMatrikkelenheterForOmraade" style="document"/>
+			<wsdl:input name="FinnMatrikkelenheterForOmraadeRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnMatrikkelenheterForOmraadeRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="HentOmraadeForAdresse">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Kart/Matrikkel/Xml/Wsdl/20100615/#HentOmraadeForAdresse" style="document"/>
+			<wsdl:input name="HentOmraadeForAdresseRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentOmraadeForAdresseRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Matrikkel">
+		<wsdl:port name="Matrikkelkart" binding="tns:Matrikkelkart">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

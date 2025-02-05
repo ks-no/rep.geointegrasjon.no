@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ArkivIndreKjerne" targetNamespace="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Wsdl/20100615" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Wsdl/20100615" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100615" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100615" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100615" xmlns:kartgeometrins="http://rep.geointegrasjon.no/Kart/Geometri/Xml/Schema/20100615" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100615" xmlns:arkivindrekjernens="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100615" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100615" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100615" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100615 ">
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Schema/20100615/giArkivIndreKjerne20100615.xsd"/>
+	<wsdl:import namespace="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615" location="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100615/giPlanFelles20100615.xsd"/>
+	<wsdl:types/>
+	<wsdl:message name="FinnDokumenterRequest">
+		<wsdl:part name="planident" type="planfellesns:NasjonalArealplanId"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterResponse">
+		<wsdl:part name="return" type="arkivindrekjernens:Dokument"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilRequest">
+		<wsdl:part name="dokid" type="arkivindrekjernens:Dokumentnummer"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilResponse">
+		<wsdl:part name="return" type="arkivindrekjernens:Fil"/>
+	</wsdl:message>
+	<wsdl:portType name="ArkivKjerne">
+		<wsdl:operation name="HentFil">
+			<wsdl:input name="HentFilRequestRequest" message="tns:HentFilRequest"/>
+			<wsdl:output name="HentFilRequestResponse" message="tns:HentFilResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenter">
+			<wsdl:input name="FinnDokumenterRequestRequest" message="tns:FinnDokumenterRequest"/>
+			<wsdl:output name="FinnDokumenterRequestResponse" message="tns:FinnDokumenterResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ArkivKjerne" type="tns:ArkivKjerne">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="HentFil">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Wsdl/20100615/#HentFil" style="document"/>
+			<wsdl:input name="HentFilRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentFilRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenter">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/IndreKjerne/Xml/Wsdl/20100615/#FinnDokumenter" style="document"/>
+			<wsdl:input name="FinnDokumenterRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDokumenterRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="IndreKjerne">
+		<wsdl:port name="ArkivKjerne" binding="tns:ArkivKjerne">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

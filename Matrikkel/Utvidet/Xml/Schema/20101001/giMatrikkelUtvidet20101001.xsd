@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101001" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101001" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20101001" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101001" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101001" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" elementFormDefault="qualified" version="20101001 - GeoIntegrasjon v0.96">
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001/giFellesGeometri20101001.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001/giMatrikkelBasis20101001.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001/giFellesKodeliste20101001.xsd"/>
+	<xs:element name="AnleggsFlateForMatrikkelenhet" type="tns:AnleggsFlateForMatrikkelenhet"/>
+	<xs:complexType name="AnleggsFlateForMatrikkelenhet">
+		<xs:annotation>
+			<xs:documentation>Koblingsklasse mellom matrikkelenhet og AnleggsprojeksjonsFlate.
+    Trenger kun å være med dersom man må vite om det er hovedflate eller ikke.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="hovedflate" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Anleggsprojeksjonsflate" type="tns:Anleggsprojeksjonsflate" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Anleggseiendom" type="tns:Anleggseiendom"/>
+	<xs:complexType name="Anleggseiendom">
+		<xs:annotation>
+			<xs:documentation>er definert i matrikkellova § 5b) som "ein bygning eller konstruksjon, eller eit avgrensa fysisk volum som er tillate utbygt, og som er utskilt som eigen eigedom. Fast anlegg på eigarlaus sjøgrunn eller i eigarlaus undergrunn kan også opprettast som anleggseigedom."
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="anleggstype" type="tns:AnleggstypeKode" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Angir hvilken type anlegg anleggseiendommen omfatter
+      </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AnleggsFlateForMatrikkelenhet" type="tns:AnleggsFlateForMatrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Anleggsprojeksjonsflate" type="tns:Anleggsprojeksjonsflate" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Anleggsprojeksjonsflate" type="tns:Anleggsprojeksjonsflate" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BruksenhetListe" type="tns:BruksenhetListe"/>
+	<xs:complexType name="BruksenhetListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Bruksenhet" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Bruksenhet" type="tns:Bruksenhet"/>
+	<xs:complexType name="Bruksenhet">
+		<xs:annotation>
+			<xs:documentation>Med bruksenhet menes bygning eller del av bygning (lokale), f.eks. bolig, kontorenhet, verksted og lager, dvs. et rom eller en samling rom og åpne deler som sammen anvendes i en bestemt hensikt av en bruker, som kan være eier, leier eller annen bruksrettshaver. (Fra merknadene til matrikkelforskriften §3).
+    
+    For bygning som ikke har en reell bruksenhet, skal bruker opprette en "fiktiv" bruksenhet av typen Unummerert. dette gjøres for å ta vare på knytning til matrikkelenhet og adresse på samme måte både for bygninger med og uten bruksenheter.
+    
+    I Matrikkelen:
+    Relasjon til Matrikkelenhet er at en Bruksenehet er koblet til 0 eller 1 Matrikkelenhet.
+    Relasjon til Adresse er at en Bruksenehet er koblet til 0 eller 1 Adresse.
+    Relasjon til Bygning er at en Bruksenehet er koblet til 1 Bygning.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="etasjeNummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Etasjenr innenfor etasjeplanet bruksenheten ligger på; del av logisk ident.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loepenummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Løpenr innen for etasjen bruksenheten ligger på; del av logisk ident.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="etasjeplan" type="tns:EtasjeplanKode" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Etasjeplanet bruksenheten ligger på.  Kan for eksempel være Hovedetasje eller underetasje.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bruksareal" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Alt bruksareal som hører til bruksenheten, uansett etasje.
+      Boder og rom i underetasje og kjeller i blokker o.l. skal tas med dersom de tydelig tilhører de enkelte bruksenhetene spesielt. Rom som er felles for flere bruksenheter, f.eks felles trapp, gangareal, fellesrom og boder som ikke kan spesifiseres på bruksenhet, tas derimot ikke med.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bruksenhetstype" type="tns:BruksenhetstypeKode" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hva bruksenheten brukes til. Er en av gitte, lovlige typer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="EtasjeListe" type="tns:EtasjeListe"/>
+	<xs:complexType name="EtasjeListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Etasje" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Etasje" type="tns:Etasje"/>
+	<xs:complexType name="Etasje">
+		<xs:annotation>
+			<xs:documentation>Etasje i bygning.
+    For å kunne angi areal pr. etasje, siden bruksenheter kan gå over flere etasjer.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="etasjeplan" type="tns:EtasjeplanKode" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hvilket plan etasje ligger i, f.eks. om det er en underetasje eller loftsetasje. Er en av gitte, lovlige typer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="etasjeNummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fortløpende nummerering av etasjer som har samme type.
+      Kjeller- og underetasjer nummereres fra terrengnivå og nedover, dvs. har nummer 1 øverst. Hoved- og loftsetasjer nummereres fra terrengnivå og oppover, dvs. har nummer 1 nederst.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bruksarealTilBolig" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Etasjens samlede brukareal til boligformål. I boligbygg regnes garasje som bruksareal til bolig når garasjen tilhører en bolig, også ved på/tilbygg av garasje.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bruksarealTilAnnet" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Bruksareal til annet enn bolig i henhold til NS 3940 med diverse unntak.
+      
+      Unntak fra NS 3940 er:
+      - Arealene skal angis i hele kvm
+      - Areal for store piper og kanaler trekkes ikke fra
+      
+      På etasjenivå omfatter arealet i utgangspunktet alt tilgjengelig areal. Inspeksjonsluke ut til ellers utilgjengelig areal gjør ikke arealet tilgjengelig i denne sammenhengen. Åpning for trapper, heiser ol. og vegger mellom bruksenheter skal trekkes fra. Dersom planet er loft, måles arealet ut til 0,6m utenfor høyden på 1,9m.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bruksarealTotalt" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Totalt bruksareal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AnleggsprojeksjonsflateListe" type="tns:AnleggsprojeksjonsflateListe"/>
+	<xs:complexType name="AnleggsprojeksjonsflateListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Anleggsprojeksjonsflate" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Anleggsprojeksjonsflate" type="tns:Anleggsprojeksjonsflate"/>
+	<xs:complexType name="Anleggsprojeksjonsflate">
+		<xs:annotation>
+			<xs:documentation>Geometri for anleggseiendom:
+    
+    Anleggseiendom kan ha en kombinasjon av teig(er) på bakken og projeksjoner av volumer over/under bakken.
+    
+    Teigene på bakken inngår i den vanlige strukturen av teiger sammen med andre matrikkelenheter.
+    
+    Hver Anleggsprojeksjonsflate er uavhengig av annen geometri. (Ikke delt geometri.) Dette er alltid flate. Det skal ikke være noen kontroll mot overlapp mellom projeksjonsflater. Flaten kan ha indre hull.
+    
+    AnleggsprojeksjonsFlate avgrenses av AnleggsprojeksjonsGrense som avgrenses av AnleggsprojeksjonsPunkt
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="omraade" type="fellesgeometrins:Flate" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="representasjonspunkt" type="tns:Representasjonspunkt" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="kommentar" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>tekstlig beskrivelse knyttet til anleggsprojeksjonsflaten.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="medium" type="tns:MediumKode" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>AnleggsprojeksjonsFlate merkes med Medium (fra FKB). Dette angir om flaten ligger over/under terrengnivå eller i vann/-over sjøgrunn (Kode O, U, V).
+      Det opereres ikke med noen videre lagdeling innen disse lagene.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="anleggsprojeksjonsareal" type="xs:double" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AnnenMatrikkelenhet" type="tns:AnnenMatrikkelenhet"/>
+	<xs:complexType name="AnnenMatrikkelenhet">
+		<xs:annotation>
+			<xs:documentation>Matrikkellova § 5, siste ledd: "Einingar, under dette rettar, som er tildelte matrikkelnummer etter tidlegare regelverk, blir rekna som matrikkeleining og kan stå oppført i matrikkelen."
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="annenMatrikkelenhetsType" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Annen type matrikkelenhet enn de som er nevnt spesielt. Er en av gitte, lovlige typer.
+      </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Festegrunn" type="tns:Festegrunn"/>
+	<xs:complexType name="Festegrunn">
+		<xs:annotation>
+			<xs:documentation>er definert i matrikkellova § 5e) som "del av grunneigedom eller jordsameige som nokon har festerett til eller som kan festast bort, eller som nokon har ein tilsvarande eksklusiv og langvarig bruksrett til."
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="punktfeste" type="xs:boolean" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Punktfeste er feste der det i festeavtalen ikke er sagt noe om størrelsen på tomta (lov om tomtefeste §16, første ledd, tredje punktum).
+      
+      Hensikten med arealet som avgrensingen danner er ikke å angi eksakt areal som punktfestet disponerer, men at elementer som hører til punktfestet (f.eks bygning, brønn) kommer innenfor flate. Dette har betydning for kontroll- /analysefunksjonalitet</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Grunneiendom" type="tns:Grunneiendom"/>
+	<xs:complexType name="Grunneiendom">
+		<xs:annotation>
+			<xs:documentation>er definert i matrikkellova § 5a) som " eigedom som er avgrensa ved eigedomsgrenser på jordoverflata og som med dei avgrensingane som følgjer av at det eventuelt er oppretta anleggseigedom etter bokstav b, strekkjer seg så langt nedover i grunnen og oppover i lufta som privat eigedomsrett rekk etter alminnelege reglar."
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Matrikkelenhet">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Jordsameie" type="tns:Jordsameie"/>
+	<xs:complexType name="Jordsameie">
+		<xs:annotation>
+			<xs:documentation>er definert i matrikkellova § 5 d) som "grunnareal som ligg i sameige mellom fleire grunneigedommar, og der sameigepartane inngår i grunneigedommane".
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="avklartEiere" type="xs:boolean" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Om det er fullstendig avklart hvilke matrikkelenheter som er eiere.
+      </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="avklartAndeler" type="xs:boolean" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>om alle andeler i jordsameiet er avklart.
+      </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Seksjon" type="tns:Seksjon"/>
+	<xs:complexType name="Seksjon">
+		<xs:annotation>
+			<xs:documentation>eierseksjon kan opprettes som egen matrikkelenhet, jf matrikkellova § 5 c). 
+    Med eierseksjon forstås sameieandel i bebygd eiendom med tilknyttet enerett til bruk av en av flere boliger eller andre bruksenheter i eiendommen, jf eierseksjonssloven § 1.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Matrikkelenhet">
+				<xs:sequence>
+					<xs:element name="sameieBroek" type="tns:Andel" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>sameiebrøk for hver seksjon, jf. eierseksjonslova § 6 siste ledd.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AnleggsFlateForMatrikkelenhet" type="tns:AnleggsFlateForMatrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Anleggsprojeksjonsflate" type="tns:Anleggsprojeksjonsflate" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Anleggsprojeksjonsflate" type="tns:Anleggsprojeksjonsflate" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TeigListe" type="tns:TeigListe"/>
+	<xs:complexType name="TeigListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Teig" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Teig" type="tns:Teig"/>
+	<xs:complexType name="Teig">
+		<xs:annotation>
+			<xs:documentation>En teig er et sammenhengende areal som avgrenses av teiggrense.
+    Teiger skal ikke overlappe hverandre.
+    Matrikkelenheter som består av flere areal som er sammenhengende i bare et punkt er teigdelt etter denne definisjonen.
+    Flaten må ha ytre avgrensning, og eventuelle indre avgrensninger kan ikke overlappe hverandre 
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="uregistrertJordsameie" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Angir om teigen inngår i brukssameie mellom matrikkelenheter, hvor sameiet ikke har eget matrikkelnr. (dvs. ikke matrikkelenheten jordsameie).
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="avklartEiere" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Om det er avklart hvilke matrikkelenheter som har del i uregistert jordsameie.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="teigMedFlereMatrikkelenheter" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Angir om teigen tilhører flere matrikkelenheter.
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tvist" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Om det er tvist 
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omraade" type="fellesgeometrins:Flate" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="representasjonspunkt" type="tns:Representasjonspunkt" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="teigareal" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>areal som fremkommer på bakgrunn av registrert geometri om enheten i matrikkelen
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="teigarealmerknad" type="tns:ArealmerknadKode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TeigForMatrikkelenhet" type="tns:TeigForMatrikkelenhet"/>
+	<xs:complexType name="TeigForMatrikkelenhet">
+		<xs:annotation>
+			<xs:documentation>Inneholder informasjon som ligger på relasjonen mellom matrikkelenhet og teig. Representasjonspunktet hentes fra hovedteig og i visninger.
+    Trenger kun å være med dersom man må vite om det er hovedTeig eller ikke, da en teig kan være hovedteig for en matrikkelenhet, men ikke for en annen dersom teigen er en del av flere matrikkelenheter.
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="hovedteig" type="xs:boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Alle matrikkelenheter har en hovedteig. Dersom matrikkelenheten kun har en teig, så er denne hovedteigen. Dersom matrikkelenheten har flere teiger, velges normalt den teigen der bygningen(e) står, som hovedteig. Hovedteig velges ellers skjønnsmessig, der hovedkriteriet vil være hvilken av teigene som fremstår som den mest sentrale. Hovedteigens representasjonspunkt vil også være matrikkelenhetens representasjonspunkt.
+      
+      Foreslås automatisk slik:
+      - hvis en teig så settes den til hovedteig
+      - hvis flere teiger og en/flere av dem har boligbygg så foreslås den største teigen til hovedteig
+      - hvis flere teiger og en/flere av dem har bygg som ikke er bolig så foreslås den største teigen til hovedteig
+      - hvis flere teiger og ingen av dem har bygg så foreslås den største teigen til hovedteig</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Teig" type="tns:Teig" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AnleggstypeKode" type="tns:AnleggstypeKode"/>
+	<xs:complexType name="AnleggstypeKode">
+		<xs:annotation>
+			<xs:documentation>angir hvilken type anlegg anleggseiendommen representerer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BruksenhetstypeKode" type="tns:BruksenhetstypeKode"/>
+	<xs:complexType name="BruksenhetstypeKode">
+		<xs:annotation>
+			<xs:documentation>Oversikt over ulike typer bruksenheter (lokaer) i en bygning.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="EtasjeplanKode" type="tns:EtasjeplanKode"/>
+	<xs:complexType name="EtasjeplanKode">
+		<xs:annotation>
+			<xs:documentation>Lovlige koder for hvilken etasje en bruksenhet tilhører.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MediumKode" type="tns:MediumKode"/>
+	<xs:complexType name="MediumKode">
+		<xs:annotation>
+			<xs:documentation>objektets beliggenhet i forhold til jordoverflaten
+    
+    Eksempel:
+    Veg på bro, i tunnel, inne i et bygningsmessig anlegg, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

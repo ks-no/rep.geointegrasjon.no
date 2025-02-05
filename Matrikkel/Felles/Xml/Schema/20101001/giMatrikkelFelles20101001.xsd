@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101001" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101001" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20101001" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101001" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101001" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" elementFormDefault="qualified" version="20101001 - GeoIntegrasjon v0.96">
+	<xs:element name="BygningsId" type="tns:BygningsId"/>
+	<xs:complexType name="BygningsId">
+		<xs:annotation>
+			<xs:documentation>En entydig identifikasjon av bygningen. Bygningsnumrene er unike på landsbasis, og tildeles automatisk.
+    Består av bygningsNummer og endringsløpenummer.
+    Dersom det er en BygningsEndring, er endringsløpenummer satt til &gt; 0, ellers er den 0 For Bygning.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bygningsNummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>En entydig identifikasjon av bygnigen. Bygningsnumrene er unike på landsbasis, og tildeles automatisk.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endringsloepenummer" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Løpende nummerering av bygningsendringer til en bygning. Tidligere kalt Låpenummer.
+      Er satt til 0 dersom det er en Bygning, &gt;0 dersom det er en Bygningsendring.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MatrikkelnummerListe" type="tns:MatrikkelnummerListe"/>
+	<xs:complexType name="MatrikkelnummerListe">
+		<xs:sequence>
+			<xs:element name="liste" type="tns:Matrikkelnummer" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Matrikkelnummer" type="tns:Matrikkelnummer"/>
+	<xs:complexType name="Matrikkelnummer">
+		<xs:annotation>
+			<xs:documentation>Entydig identifisering av matrikkelenhet innen kommune, definert i matrikkelforskrift § 7.
+    
+    Matrikkelnummeret for grunneiendom, anleggseiendom og jordsameie skal bestå av et gårdsnummer og et bruksnummer. Bruksnummeret inngår i en fortløpende nummerering innenfor gårdsnummeret. 
+    
+    Matrikkelnummer for festegrunn skal bestå av gårdsnummer, bruksnummer og festenummer. Festenummeret inngår i en fortløpende nummerering av festegrunn på vedkommende grunneiendom eller jordsameie.
+    
+    Matrikkelnummer for eierseksjon skal bestå av gårdsnummer, bruksnummer og seksjonsnummer. Dersom eierseksjonen ligg på festegrunn, skal festenummeret være en del av matrikkelnummeret. Seksjonsnummeret inngår i en fortløpende nummerering av eierseksjonene på vedkommende grunneiendom, festegrunn eller jordsameie.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="kommunenummer" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Angivelse av hvilken kommune objektet har vært eller er matrikulert i.
+      Merknad: Omfatter både eksisterende og foreldede kommuner</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gaardsnummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>En kommune er delt inn i flere gårder, og alle matrikkelenheter ligger i en gård. Gårdsnr må være større enn 0. 
+      
+      Off. forkortelser: gnr
+      
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bruksnummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hver gård er delt opp i et eller flere bruk. Neste ledige bruksnr innen et gårdsnr tildeles automatisk. Bruksnr må være større enn 0.
+      
+      Off. forkortelser: bnr
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="festenummer" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fortløpende nummerering av fester under gårdsnr/bruksnr. Festenr må være større enn eller lik 0.
+      Off. forkortelser: fnr
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="seksjonsnummer" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fortløpende nummerering av seksjoner under gårdsnr/bruksnr og eventuelt festenr. Seksjonsnr må være større enn eller lik 0.
+      Off. forkortelse: snr
+      </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

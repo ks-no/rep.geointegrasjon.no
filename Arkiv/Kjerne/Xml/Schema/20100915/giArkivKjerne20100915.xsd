@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20100915" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20100915" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20100915" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100915" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20100915" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100915" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20100915" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20100915" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20100915" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20100915" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20100915" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20100915" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20100915" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100915" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20100915" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20100915" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20100915" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100915" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20100915" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20100915" elementFormDefault="qualified" version="20100915 - GeoIntegrasjon v0.94">
+  <xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100915" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20100915/giArkivFelles20100915.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100915" schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20100915/giPlanFelles20100915.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100915" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20100915/giMatrikkelFelles20100915.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100915" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20100915/giFellesKontakt20100915.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20100915" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20100915/giFellesGeometri20100915.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20100915" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20100915/giFellesKodeliste20100915.xsd"/>
+	<xs:element name="Ansvarlig" type="tns:Ansvarlig"/>
+	<xs:complexType name="Ansvarlig">
+		<xs:annotation>
+			<xs:documentation>Objekt for å angi at sakene / journalpostene som returneres skal &amp;rdquo;tilhøre&amp;rdquo; h.h.v. pålogget bruker (EGEN) eller pålogget brukers administrative enhet (EGENENHET). 
+    Tilhøre kan bety part i sak / sendt fra / til hvis bruker er ekstern i forhold til systemet. </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Kriterie">
+				<xs:sequence>
+					<xs:element name="eier" type="tns:AnsvarligEnum" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="AnsvarligEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EGEN"/>
+			<xs:enumeration value="EGENENHET"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="AvsenderMottaker" type="tns:AvsenderMottaker"/>
+	<xs:complexType name="AvsenderMottaker">
+		<xs:annotation>
+			<xs:documentation>
+    				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II
+    				Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+    				Chapter: 14.2 Modul for arkivstyring Sub Chapter: 14.2.9
+    				Avsender/Mottaker (AVSMOT)
+    
+    Det kan være 1:mange avsmot i en journalpost. Kravene her avhenger av type journalpost. 
+    Hvis det ikke er angitt noen avsmot med amBehansv 1 (behandlingsansvarlig), skal det automatisk legges til en behandlingsansvarlig post. 
+    AvsmotType er utvidet med følgende tillegg i forhold til Noark-4: amOrgnr: Organisasjonsnummer amFodselsnr: Fødselsnummer 
+    Avskrivning angir enten at journalposten er tatt til etterretning (setter da kun amAvskm og amAvskdato i mottager på innkommende dokument &amp;ndash; jpNdoktype I) eller at journalposten er et svar på en annen journalpost (setter da amBesvarXxx i mottager på utgående dokument (svaret) &amp;ndash; jpNdoktype U). 
+    Merk at mottagerposten for et inngående er behandlingsansvarlig (amBehansv 1). 
+    			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amId i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mottaker" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amIhtype i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kopimottaker" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amKopimot i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="behandlingsansvarlig" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amBehansv i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermetKorrespondansepart" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amU1 i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kortnavn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="deresReferanse" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amRef i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="journalenhet" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amJenhet i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="avskrivningsmaate" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amAvskm i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="avskrivningsdato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amAvskdato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fristBesvarelse" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amFrist i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="forsendelsesmaate" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amForsend i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="administrativEnhetKode" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amAdmkort i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="administrativEnhetNavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amAdmbet i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksbehandlerInit" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amSbhinit i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksbehandlerNavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amSbhnavn i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referanseAvskrivesAvDokumentnummer" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amAvsavdok i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referanseAvskriverDokumentnummer" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>amBesvardok i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referanseAvskriverEksternNøkkel" type="tns:EksternNoekkel" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="referanseAvskrivesAvEksternNøkkel" type="tns:EksternNoekkel" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Kontakt" type="felleskontaktns:Kontakt" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Saksmappe" type="tns:Saksmappe"/>
+	<xs:complexType name="Saksmappe">
+		<xs:annotation>
+			<xs:documentation>
+    				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II
+    				Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+    				Chapter: 14.2 Modul for arkivstyring Sub Chapter: 14.2.1
+    				Sak (NOARKSAK)
+    		
+    
+    Noark-4 sak med tillegg for ekstern nøkkel, fagsystem, klassering, part i sak, tilleggsinformasjon, prosesstrinn, matrikkelnr, bygning, koordinat, plan og journalposter. 
+    Feltet fagsystem benyttes for å angi et spesielt sett med standardverdier og/eller konverteringsregler for saken med tilleggsobjekter. 
+    Spesielt for feltet saOfftittel: Hvis denne angis i put må feltet saTittel inkludere hele saOfftittel som første del, for eksempel: saOfftittel: ”Del 1 av tittel som er offentlig” saTittel: ”Del 1 av tittel som er offentlig og del 2 av tittel som er skjermet” 	
+    
+    Skal noen av attributter fra basismappe flyttes til saksmappe, samt sakspart for å være mer ihht n5?
+    
+    Da må stedfestetmappe arve fra saksmappe i staden.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saId i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mappeID" type="Saksnummer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="mappetype" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saType i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksdato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saDato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tittel" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saTittel i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offentligTittel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saOfftittel i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dokumentmedium" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saPapir i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingTittel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saU1 i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksstatus" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saStatus i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referanseArkivdel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saArkdel i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="journalenhet" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation> saJenhet i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilgangsrestriksjon" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saTgkode i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingshjemmel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saUoff i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingOpphoererDato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saAgdato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingOpphoererAksjon" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saAgkode i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bevaringstid" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saBevtid i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kassasjonsvedtak" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saKasskode</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kassasjonsdato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saKassdato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="prosjekt" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saProsjekt i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="administrativEnhetKode" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saAdmkort i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="administrativEnhetNavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saAdmbet i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksbehandlerInit" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saAnsvinit i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksbehandlerNavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saAnsvnavn i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilgangsgruppeNavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>saTggruppnavn i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fagsystem" type="tns:EksternNoekkel" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="journalpost" type="tns:Journalpost" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="klasse" type="tns:Klasse" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="sakspart" type="tns:Sakspart" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="tilleggsinformasjon" type="tns:Tilleggsinformasjon" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="referanseEksternNøkkel" type="tns:EksternNoekkel" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Dokument" type="tns:Dokument"/>
+	<xs:complexType name="Dokument">
+		<xs:annotation>
+			<xs:documentation>
+    				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II
+    				Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+    				Chapter: 14.3 Modul for elektronisk arkiv Sub Chapter:
+    				14.3.1 Dokumentlink (DOKLINK) Sub Chapter: 14.3.2
+    				Dokumentbeskrivelse (DOKLINK) Sub Chapter: 14.3.3
+    				Versjon (DOKVERSJON)
+    		
+    Sammensatt objekt med de viktigste feltene fra Noark-4 dokumentlink, dokument-beskrivelse og dokumentversjon, med tillegg for fil (dokumentinnholdet). Merk at 
+    Noark 4 Web Services Funksjonell beskrivelse Versjon 2.0 høringsutkast 2009-12-14 Side 18 av 18 
+    dette betyr at tjenestene kun støtter én journalpost for en dokumentbeskrivelse og kun en versjon/variant av dokumentversjon. 
+    Det kan være 0:mange dokumenter til en journalpost. 
+    Merk at innholdet i feltet dlDokkat kan kreve forhåndsregistrering av aktuelle verdier i arkivet. Feltet kan også bli konvertert inn i arkivet ut i fra konverteringsregler knyttet til angitt fagsystem på journalposten. 
+    DokumentType er utvidet med følgende felt i forhold til Noark-4: veFilnavn: Fullt filnavn uten katalog, men med type (som &amp;rdquo;N4WS.pdf&amp;rdquo;) veMimeType: Mimetype for filinnholdet, for eksempel &amp;rdquo;application/pdf&amp;rdquo; for .pdf. 
+    Disse to feltene er viktige for korrekt håndtering av vedlagte dokument. 	</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>dbDokid i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dokumentnummer" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>dlRnr i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilknyttetRegistreringSom" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>dlType i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dokumenttype" type="tns:Dokumentkategori" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>dbKategori i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tittel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>dbTittel i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dokumentstatus" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>dbStatus i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="variantformat" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>veVariant i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="format" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>veDokformat i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Fil" type="tns:Fil" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Dokumentkategori" type="tns:Dokumentkategori"/>
+	<xs:complexType name="Dokumentkategori">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Dokumentnummer" type="tns:Dokumentnummer"/>
+	<xs:complexType name="Dokumentnummer">
+		<xs:complexContent>
+			<xs:extension base="tns:Journpostnoekkel">
+				<xs:sequence>
+					<xs:element name="aar" type="xs:integer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>saSaar i n4</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sekvensnummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>saSeknr i n4</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dokumentnummer" type="xs:integer" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>jpJpostnr i n4</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="EksternNoekkel" type="tns:EksternNoekkel"/>
+	<xs:complexType name="EksternNoekkel">
+		<xs:annotation>
+			<xs:documentation>Da de fleste fagsystemer har egne nøkler for identifisering av objekter, er det lagt til mulighet for at denne kan benyttes for identifisering overfor arkivet også. Typen har to felt: 
+    
+    	1. eksternSystem: Identifikator for fagsystemet eller nøkkeltype i dette. Det forutsettes at denne kan konfigureres både i fagsystemet og i arkivsystemet. Lengden er tilpasset feltet Informasjonstype i Tilleggsinformasjon. 
+    	2. nokkel: Nøkkel i fagsystemet, for eksempel kundenummer eller ansattnummer. Lengden er tilpasset feltet Tekst i Tilleggsinformasjon. Når eksternnokkel benyttes for å angi fagsystem, angir nokkel for eksempel type sak og benyttes da for å finne riktige standardverdier for den aktuelle saken. 
+    </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fagsystem" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>eksternSystem i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="noekkel" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Filinnhold" type="tns:Filinnhold"/>
+	<xs:complexType name="Filinnhold">
+		<xs:annotation>
+			<xs:documentation>Brukes ved mindre filer</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Fil">
+				<xs:sequence>
+					<xs:element name="base64" type="xs:base64Binary" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Filreferanse" type="tns:Filreferanse"/>
+	<xs:complexType name="Filreferanse">
+		<xs:annotation>
+			<xs:documentation>Brukes typisk ved store filer</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:Fil">
+				<xs:sequence>
+					<xs:element name="uri" type="xs:anyURI" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="kvitteringUri" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Journalpost" type="tns:Journalpost"/>
+	<xs:complexType name="Journalpost">
+		<xs:annotation>
+			<xs:documentation>
+    				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II
+    				Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+    				Chapter: 14.2 Modul for arkivstyring Sub Chapter: 14.2.8
+    				Joournalpost (JOURNPOST)
+    			
+    Noark-4 journalpost med tillegg for ekstern journalpostnøkkel, ekstern saksnøkkel, fagsystem, avsendere/mottagere, tilleggsinformasjon og dokument. 
+    Det kan være 0:mange journalposter i en sak. 
+    Feltet fagsystem benyttes for å angi et spesielt sett med standardverdier og/eller konverteringsregler for journalposten med tilleggsobjekter. 
+    Spesielt for feltet jpOffinnhold: Hvis denne angis i put må feltet jpInnhold inkludere hele jpOffinnhold som første del, for eksempel: jpOffinnhold: &amp;rdquo;Del 1 av innhold som er offentlig&amp;rdquo; jpInnhold: &amp;rdquo;Del 1 av innhold som er offentlig og del 2 av innhold som er skjermet&amp;rdquo; </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpId i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loepenummer" type="tns:Lopenummer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpJaar i n4 og jpSeknr i n4
+      
+      . Det anbefales at formatet i Noark-4 (nnnnnnn/åå) fortsatt brukes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dokumentnummer" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpJpostnr i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="journaldato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpJdato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="journalposttype" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpNdoktype i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dokumentetsDato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpDokdato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="journalstatus" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpStatus i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tittel" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpInnhold i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingTittel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpU1 i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="forfallsdato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpForfdato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilgangsrestriksjon" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpTgkode i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingshjemmel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpUoff i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingOpphoererDato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpAgdato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermingOpphoererAksjon" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpAgkode i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksdel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpSaksdel i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermetSaksdel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpU2 i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referanseArkivdel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpArkdel i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilleggskode" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpTlkode i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="antallVedlegg" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpAntved i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referanseForelderMappe" type="Saksnummer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpSaar i n4 og jpSaseknr i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offentligTittel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpOffinnhold i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilgangsgruppeNavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpTggruppnavn i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fagsystem" type="tns:EksternNoekkel" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="avsenderMottaker" type="tns:AvsenderMottaker" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="dokument" type="tns:Dokument" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="referanseEksternNøkkel" type="tns:EksternNoekkel" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="referanseMappeEksternNøkkel" type="tns:EksternNoekkel" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="tilleggsinformasjon" type="tns:Tilleggsinformasjon" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Journpostnoekkel" type="tns:Journpostnoekkel"/>
+	<xs:complexType name="Journpostnoekkel">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Klasse" type="tns:Klasse"/>
+	<xs:complexType name="Klasse">
+		<xs:annotation>
+			<xs:documentation>
+    				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II
+    				Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+    				Chapter: 14.2 Modul for arkivstyring Sub Chapter: 14.2.2
+    				Klassering (KLASSERING)
+    		
+    Det kan være 0:mange forekomster av klassering i en sak. Merk at oppsett i arkivet kan medføre krav om minst en forekomst. Det skal være mulig å definere standard-verdi for denne. 
+    For arkivdeler med seriearkiv, for eksempel gnr/bnr-arkiv, må fagsystemet angi klasseringen. 	</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="rekkefoelge" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>klSort i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="klassifikasjonssystem" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>klOrdnpri i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="klasseID" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>klOrdnver i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermetKlasse" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>klU1 i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ledetekst" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>klOpltekst i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tittel" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>klOvbesk i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Lopenummer" type="tns:Lopenummer"/>
+	<xs:complexType name="Lopenummer">
+		<xs:complexContent>
+			<xs:extension base="tns:Journpostnoekkel">
+				<xs:sequence>
+					<xs:element name="aar" type="xs:integer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>jpJaar i n4</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sekvensnummer" type="xs:integer" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>jpSeknr i n4</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Saksnoekkel" type="tns:Saksnoekkel"/>
+	<xs:complexType name="Saksnoekkel">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Sakspart" type="tns:Sakspart"/>
+	<xs:complexType name="Sakspart">
+		<xs:annotation>
+			<xs:documentation>
+    				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II
+    				Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+    				Chapter: 14.2 Modul for arkivstyring Sub Chapter: 14.2.4
+    				Part i sak (SAKSPART)
+    			
+    
+    Det kan være 0:mange forekomster av sakspart i en sak. Merk at innholdet i feltet spRolle kan kreve forhåndsregistrering av aktuelle verdier i arkivet. Feltet kan også bli konvertert inn i arkivet ut i fra konverteringsregler knyttet til angitt fagsystem på arkivsaken. 
+    SakspartType er utvidet med følgende tillegg i forhold til Noark-4: spId: ID-felt som trengs i forbindelse med sletting av sakspart. spOrgnr: Organisasjonsnummer spFodselsnr: Fødselsnummer </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>spId i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skjermetSakspart" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>spU1 i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kortnavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>spKortnavn i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kontaktperson" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>spKontakt i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sakspartRolle" type="tns:SakspartRolle" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>spRolle i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="merknad" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>spMerknad i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Kontakt" type="felleskontaktns:Kontakt" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SakspartRolle" type="tns:SakspartRolle"/>
+	<xs:complexType name="SakspartRolle">
+		<xs:complexContent>
+			<xs:extension base="felleskodelistens:Kode">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Stedfestetmappe" type="tns:Stedfestetmappe"/>
+	<xs:complexType name="Stedfestetmappe">
+		<xs:complexContent>
+			<xs:extension base="tns:Saksmappe">
+				<xs:sequence>
+					<xs:element name="Punkt" type="fellesgeometrins:Punkt" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="BygningsId" type="matrikkelfellesns:BygningsId" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Matrikkelnummer" type="matrikkelfellesns:Matrikkelnummer" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="NasjonalArealplanId" type="planfellesns:NasjonalArealplanId" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="SoekeOperatorEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LT"/>
+			<xs:enumeration value="LE"/>
+			<xs:enumeration value="EQ"/>
+			<xs:enumeration value="GE"/>
+			<xs:enumeration value="GT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Soekefelt" type="tns:Soekefelt"/>
+	<xs:complexType name="Soekefelt">
+		<xs:complexContent>
+			<xs:extension base="tns:Kriterie">
+				<xs:sequence>
+					<xs:element name="feltnavn" type="xs:string" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="feltverdi" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Soekskriterie" type="tns:Soekskriterie"/>
+	<xs:complexType name="Soekskriterie">
+		<xs:annotation>
+			<xs:documentation>Det kan enten angis et par av feltnavn / feltverdi eller som EierType / BboxType. 
+    Det er AND mellom søkeargumentene. 
+    Unntak: Hvis SAMME feltnavn er angitt flere ganger, er det OR mellom verdiene: klOrdnpri/FE, klOrdnver/123, klOrdnver/456 gir klOrdnver=FE AND (klOrdnver=123 OR klOrdnver=456). 
+    Alle felt som kan returneres av det tilhørende get-kallet kan angis (inklusive alle underobjekter) med følgende begrensninger: JournpostType ved søk etter saker og DokumentTypefelt som begynner med ve (søk etter journalposter). 
+    Feltnavnene angitt i argumentet fieldName er de samme som de som benyttes ved put/get. 
+    Argumentet angitt i fieldValue følger samme regler som for put-kallene. Argumentet er case insensitivt. * benyttes som &amp;rdquo;wild card&amp;rdquo;: Hvis det er * i verdien og operator er EQ, utføres SQL &amp;rdquo;like&amp;rdquo;. Eksemplen &amp;rdquo;test*&amp;rdquo; -&gt; &amp;rdquo;like &amp;rsquo;test%&amp;rsquo;&amp;rdquo; som SQL. 
+    Hvis flere felt fra samme underobjekt er angitt, skal disse tilhøre samme objekt (d.v.s. at søk etter sak med klOrdnpri/FE, klOrdnver/123 gir saker med klassering FE/123, men ikke saker med klasseringene FE/2 og FA/123). 
+    Det er mulig å angi et attributt operator med verdiene LT, LE, EQ, GE, GT. EQ er standardverdi. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operator" type="tns:SoekeOperatorEnum" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Kriterie" type="tns:Kriterie" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Tilleggsinformasjon" type="tns:Tilleggsinformasjon"/>
+	<xs:complexType name="Tilleggsinformasjon">
+		<xs:annotation>
+			<xs:documentation>
+    				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II
+    				Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+    				Chapter: 14.2 Modul for arkivstyring Sub Chapter:
+    				14.2.31 Tilleggsinformasjon (TILLEGGSINFO)
+    
+    Det kan være 0:mange tilleggsinformasjoner til en sak eller journalpost. Merk at dette objektet er for &amp;rdquo;annen info&amp;rdquo;. Arkivet kan derfor velge å legge bl.a. eksternnøkkel og fagsystem inn som parametre her. 
+    			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="systemID" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tiId i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rekkefoelge" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tiRnr i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="informasjonstype" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tiItype i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilgangsrestriksjon" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tiTgkode i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oppbevaresTilDato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tiOppbedato i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilleggsinformasjon" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tiTekst i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tilgangsgruppeNavn" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tiTggruppnavn i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Fil" type="tns:Fil"/>
+	<xs:complexType name="Fil" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Filer kan overføres enten via BASE64 eller via en URI. Benyttes siste form, forutsettes det at filen er tilgjengelig fra arkivsystemet for overføring dit. Referansen benyttes kun til slik overføring og ikke for fremtidig bruk. 
+    Merk: Også arkivsystemet kan velge mellom disse to ved retur av filer. 
+    For at det skal være mulig å vite hvor lenge et dokument skal ligge tilgjengelig og for å gjøre det mulig å fange opp at dokumentet ikke har blitt lagret, er det lagt til en kvitteringsURI. Er denne angitt, skal den kalles når filen er ferdig hentet. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="filnavn" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>veFilnavn i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mimeType" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>veMimeType i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Kriterie" type="tns:Kriterie"/>
+	<xs:complexType name="Kriterie" abstract="true">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="SystemID" type="tns:SystemID"/>
+	<xs:complexType name="SystemID">
+		<xs:sequence>
+			<xs:element name="systemID" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jpId i n4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

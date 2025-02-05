@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ArkivUtvidetKjerne" targetNamespace="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101001" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101001" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20101001" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101001" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101001" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001 ">
+	<wsdl:types>
+ 		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001/giFellesFeil20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001/giArkivFelles20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001/giArkivKjerne20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001/giMatrikkelFelles20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001/giPlanFelles20101001.xsd"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001">
+			<xs:include schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001/giFellesGeometri20101001.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="OppdaterMappeAnsvarligRequest">
+		<wsdl:part name="nyAdministrativEnhetKode" type="xs:string"/>
+		<wsdl:part name="nySaksbehandlerInit" type="xs:string"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeAnsvarligResponse">
+		<wsdl:part name="return" type="arkivkjernens:Saksmappe"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeAnsvarligFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeStatusRequest">
+		<wsdl:part name="saksstatuskode" type="xs:string"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeStatusResponse">
+		<wsdl:part name="return" type="arkivkjernens:Saksmappe"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeStatusFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterUnderArbeidRequest">
+		<wsdl:part name="ansvarlig" type="arkivkjernens:Ansvarlig"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterUnderArbeidResponse">
+		<wsdl:part name="return" type="arkivkjernens:JournalpostListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterUnderArbeidFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalpostRestanserRequest">
+		<wsdl:part name="ansvarlig" type="arkivkjernens:Ansvarlig"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalpostRestanserResponse">
+		<wsdl:part name="return" type="arkivkjernens:JournalpostListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalpostRestanserFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostAnsvarligRequest">
+		<wsdl:part name="journalpostnokkel" type="arkivkjernens:Journpostnoekkel"/>
+		<wsdl:part name="nyAdministrativEnhetKode" type="xs:string"/>
+		<wsdl:part name="nySaksbehandlerInit" type="xs:string"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostAnsvarligResponse">
+		<wsdl:part name="return" type="arkivkjernens:Journalpost"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostAnsvarligFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="NySakspartRequest">
+		<wsdl:part name="sakspart" type="arkivkjernens:Sakspart"/>
+		<wsdl:part name="nokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="NySakspartFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettSakspartRequest">
+		<wsdl:part name="systemID" type="xs:string"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="SlettSakspartFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyMatrikkelnummerRequest">
+		<wsdl:part name="matrikkelnr" type="matrikkelfellesns:Matrikkelnummer"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="NyMatrikkelnummerFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettMatrikkelnummerRequest">
+		<wsdl:part name="matrikkelnr" type="matrikkelfellesns:Matrikkelnummer"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="SlettMatrikkelnummerFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyBygningRequest">
+		<wsdl:part name="bygning" type="matrikkelfellesns:BygningsId"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="NyBygningFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettBygningRequest">
+		<wsdl:part name="bygning" type="BygningId"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="SlettBygningFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyPunktRequest">
+		<wsdl:part name="posisjon" type="fellesgeometrins:Punkt"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="NyPunktFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettPunktRequest">
+		<wsdl:part name="posisjon" type="fellesgeometrins:Punkt"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="SlettPunktFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="NyAvsenderMottakerRequest">
+		<wsdl:part name="avsenderMottaker" type="arkivkjernens:AvsenderMottaker"/>
+		<wsdl:part name="journalpostnokkel" type="Journalpostnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="NyAvsenderMottakerFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="SlettAvsenderMottakerRequest">
+		<wsdl:part name="systemID" type="xs:string"/>
+		<wsdl:part name="journalpostnokkel" type="Journalpostnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="SlettAvsenderMottakerFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnAlleDokumentkategorierRequest"/>
+	<wsdl:message name="FinnAlleDokumentkategorierResponse">
+		<wsdl:part name="return" type="arkivkjernens:DokumentkategoriListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnAlleDokumentkategorierFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumentkategorierRequest">
+		<wsdl:part name="saksnummer" type="arkivfellesns:Saksnummer"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumentkategorierResponse">
+		<wsdl:part name="return" type="arkivkjernens:DokumentkategoriListe"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumentkategorierFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterPlanRequest">
+		<wsdl:part name="planid" type="planfellesns:NasjonalArealplanId"/>
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterPlanFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeEksternNoekkelRequest">
+		<wsdl:part name="saksnokkel" type="arkivfellesns:Saksnoekkel"/>
+		<wsdl:part name="nokkel" type="arkivkjernens:EksternNoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeEksternNoekkelResponse">
+		<wsdl:part name="return" type="arkivkjernens:Saksmappe"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterMappeEksternNoekkelFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostEksternNoekkelRequest">
+		<wsdl:part name="journalpostnokkel" type="arkivkjernens:Journpostnoekkel"/>
+		<wsdl:part name="nokkel" type="arkivkjernens:EksternNoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostEksternNoekkelResponse">
+		<wsdl:part name="return" type="arkivkjernens:Journalpost"/>
+	</wsdl:message>
+	<wsdl:message name="OppdaterJournalpostEksternNoekkelFault">
+		<wsdl:part name="error" type="fellesfeilns:GeointegrasjonWsFault"/>
+	</wsdl:message>
+	<wsdl:portType name="ArkivKjerneUtvidet">
+		<wsdl:operation name="OppdaterJournalpostEksternNoekkel">
+			<wsdl:input name="OppdaterJournalpostEksternNoekkelRequestRequest" message="tns:OppdaterJournalpostEksternNoekkelRequest"/>
+			<wsdl:output name="OppdaterJournalpostEksternNoekkelRequestResponse" message="tns:OppdaterJournalpostEksternNoekkelResponse"/>
+			<wsdl:fault name="OppdaterJournalpostEksternNoekkelMessageFault" message="tns:OppdaterJournalpostEksternNoekkelFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeEksternNoekkel">
+			<wsdl:input name="OppdaterMappeEksternNoekkelRequestRequest" message="tns:OppdaterMappeEksternNoekkelRequest"/>
+			<wsdl:output name="OppdaterMappeEksternNoekkelRequestResponse" message="tns:OppdaterMappeEksternNoekkelResponse"/>
+			<wsdl:fault name="OppdaterMappeEksternNoekkelMessageFault" message="tns:OppdaterMappeEksternNoekkelFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterPlan">
+			<wsdl:input name="OppdaterPlanRequestRequest" message="tns:OppdaterPlanRequest"/>
+			<wsdl:fault name="OppdaterPlanMessageFault" message="tns:OppdaterPlanFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumentkategorier">
+			<wsdl:input name="FinnDokumentkategorierRequestRequest" message="tns:FinnDokumentkategorierRequest"/>
+			<wsdl:output name="FinnDokumentkategorierRequestResponse" message="tns:FinnDokumentkategorierResponse"/>
+			<wsdl:fault name="FinnDokumentkategorierMessageFault" message="tns:FinnDokumentkategorierFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnAlleDokumentkategorier">
+			<wsdl:input name="FinnAlleDokumentkategorierRequestRequest" message="tns:FinnAlleDokumentkategorierRequest"/>
+			<wsdl:output name="FinnAlleDokumentkategorierRequestResponse" message="tns:FinnAlleDokumentkategorierResponse"/>
+			<wsdl:fault name="FinnAlleDokumentkategorierMessageFault" message="tns:FinnAlleDokumentkategorierFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettAvsenderMottaker">
+			<wsdl:input name="SlettAvsenderMottakerRequestRequest" message="tns:SlettAvsenderMottakerRequest"/>
+			<wsdl:fault name="SlettAvsenderMottakerMessageFault" message="tns:SlettAvsenderMottakerFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyAvsenderMottaker">
+			<wsdl:input name="NyAvsenderMottakerRequestRequest" message="tns:NyAvsenderMottakerRequest"/>
+			<wsdl:fault name="NyAvsenderMottakerMessageFault" message="tns:NyAvsenderMottakerFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettPunkt">
+			<wsdl:input name="SlettPunktRequestRequest" message="tns:SlettPunktRequest"/>
+			<wsdl:fault name="SlettPunktMessageFault" message="tns:SlettPunktFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyPunkt">
+			<wsdl:input name="NyPunktRequestRequest" message="tns:NyPunktRequest"/>
+			<wsdl:fault name="NyPunktMessageFault" message="tns:NyPunktFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettBygning">
+			<wsdl:input name="SlettBygningRequestRequest" message="tns:SlettBygningRequest"/>
+			<wsdl:fault name="SlettBygningMessageFault" message="tns:SlettBygningFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyBygning">
+			<wsdl:input name="NyBygningRequestRequest" message="tns:NyBygningRequest"/>
+			<wsdl:fault name="NyBygningMessageFault" message="tns:NyBygningFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettMatrikkelnummer">
+			<wsdl:input name="SlettMatrikkelnummerRequestRequest" message="tns:SlettMatrikkelnummerRequest"/>
+			<wsdl:fault name="SlettMatrikkelnummerMessageFault" message="tns:SlettMatrikkelnummerFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="NyMatrikkelnummer">
+			<wsdl:input name="NyMatrikkelnummerRequestRequest" message="tns:NyMatrikkelnummerRequest"/>
+			<wsdl:fault name="NyMatrikkelnummerMessageFault" message="tns:NyMatrikkelnummerFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SlettSakspart">
+			<wsdl:input name="SlettSakspartRequestRequest" message="tns:SlettSakspartRequest"/>
+			<wsdl:fault name="SlettSakspartMessageFault" message="tns:SlettSakspartFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="NySakspart">
+			<wsdl:input name="NySakspartRequestRequest" message="tns:NySakspartRequest"/>
+			<wsdl:fault name="NySakspartMessageFault" message="tns:NySakspartFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostAnsvarlig">
+			<wsdl:input name="OppdaterJournalpostAnsvarligRequestRequest" message="tns:OppdaterJournalpostAnsvarligRequest"/>
+			<wsdl:output name="OppdaterJournalpostAnsvarligRequestResponse" message="tns:OppdaterJournalpostAnsvarligResponse"/>
+			<wsdl:fault name="OppdaterJournalpostAnsvarligMessageFault" message="tns:OppdaterJournalpostAnsvarligFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalpostRestanser">
+			<wsdl:input name="FinnJournalpostRestanserRequestRequest" message="tns:FinnJournalpostRestanserRequest"/>
+			<wsdl:output name="FinnJournalpostRestanserRequestResponse" message="tns:FinnJournalpostRestanserResponse"/>
+			<wsdl:fault name="FinnJournalpostRestanserMessageFault" message="tns:FinnJournalpostRestanserFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterUnderArbeid">
+			<wsdl:input name="FinnJournalposterUnderArbeidRequestRequest" message="tns:FinnJournalposterUnderArbeidRequest"/>
+			<wsdl:output name="FinnJournalposterUnderArbeidRequestResponse" message="tns:FinnJournalposterUnderArbeidResponse"/>
+			<wsdl:fault name="FinnJournalposterUnderArbeidMessageFault" message="tns:FinnJournalposterUnderArbeidFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeStatus">
+			<wsdl:input name="OppdaterMappeStatusRequestRequest" message="tns:OppdaterMappeStatusRequest"/>
+			<wsdl:output name="OppdaterMappeStatusRequestResponse" message="tns:OppdaterMappeStatusResponse"/>
+			<wsdl:fault name="OppdaterMappeStatusMessageFault" message="tns:OppdaterMappeStatusFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeAnsvarlig">
+			<wsdl:input name="OppdaterMappeAnsvarligRequestRequest" message="tns:OppdaterMappeAnsvarligRequest"/>
+			<wsdl:output name="OppdaterMappeAnsvarligRequestResponse" message="tns:OppdaterMappeAnsvarligResponse"/>
+			<wsdl:fault name="OppdaterMappeAnsvarligMessageFault" message="tns:OppdaterMappeAnsvarligFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ArkivKjerneUtvidet" type="tns:ArkivKjerneUtvidet">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="OppdaterJournalpostEksternNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#OppdaterJournalpostEksternNoekkel" style="document"/>
+			<wsdl:input name="OppdaterJournalpostEksternNoekkelRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterJournalpostEksternNoekkelRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterJournalpostEksternNoekkelMessageFault">
+				<soap:fault name="OppdaterJournalpostEksternNoekkelMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeEksternNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#OppdaterMappeEksternNoekkel" style="document"/>
+			<wsdl:input name="OppdaterMappeEksternNoekkelRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterMappeEksternNoekkelRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterMappeEksternNoekkelMessageFault">
+				<soap:fault name="OppdaterMappeEksternNoekkelMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterPlan">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#OppdaterPlan" style="document"/>
+			<wsdl:input name="OppdaterPlanRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="OppdaterPlanMessageFault">
+				<soap:fault name="OppdaterPlanMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumentkategorier">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#FinnDokumentkategorier" style="document"/>
+			<wsdl:input name="FinnDokumentkategorierRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDokumentkategorierRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnDokumentkategorierMessageFault">
+				<soap:fault name="FinnDokumentkategorierMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnAlleDokumentkategorier">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#FinnAlleDokumentkategorier" style="document"/>
+			<wsdl:input name="FinnAlleDokumentkategorierRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnAlleDokumentkategorierRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnAlleDokumentkategorierMessageFault">
+				<soap:fault name="FinnAlleDokumentkategorierMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettAvsenderMottaker">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#SlettAvsenderMottaker" style="document"/>
+			<wsdl:input name="SlettAvsenderMottakerRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="SlettAvsenderMottakerMessageFault">
+				<soap:fault name="SlettAvsenderMottakerMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyAvsenderMottaker">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#NyAvsenderMottaker" style="document"/>
+			<wsdl:input name="NyAvsenderMottakerRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="NyAvsenderMottakerMessageFault">
+				<soap:fault name="NyAvsenderMottakerMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettPunkt">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#SlettPunkt" style="document"/>
+			<wsdl:input name="SlettPunktRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="SlettPunktMessageFault">
+				<soap:fault name="SlettPunktMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyPunkt">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#NyPunkt" style="document"/>
+			<wsdl:input name="NyPunktRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="NyPunktMessageFault">
+				<soap:fault name="NyPunktMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettBygning">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#SlettBygning" style="document"/>
+			<wsdl:input name="SlettBygningRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="SlettBygningMessageFault">
+				<soap:fault name="SlettBygningMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyBygning">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#NyBygning" style="document"/>
+			<wsdl:input name="NyBygningRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="NyBygningMessageFault">
+				<soap:fault name="NyBygningMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettMatrikkelnummer">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#SlettMatrikkelnummer" style="document"/>
+			<wsdl:input name="SlettMatrikkelnummerRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="SlettMatrikkelnummerMessageFault">
+				<soap:fault name="SlettMatrikkelnummerMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NyMatrikkelnummer">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#NyMatrikkelnummer" style="document"/>
+			<wsdl:input name="NyMatrikkelnummerRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="NyMatrikkelnummerMessageFault">
+				<soap:fault name="NyMatrikkelnummerMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SlettSakspart">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#SlettSakspart" style="document"/>
+			<wsdl:input name="SlettSakspartRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="SlettSakspartMessageFault">
+				<soap:fault name="SlettSakspartMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NySakspart">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#NySakspart" style="document"/>
+			<wsdl:input name="NySakspartRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="NySakspartMessageFault">
+				<soap:fault name="NySakspartMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterJournalpostAnsvarlig">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#OppdaterJournalpostAnsvarlig" style="document"/>
+			<wsdl:input name="OppdaterJournalpostAnsvarligRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterJournalpostAnsvarligRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterJournalpostAnsvarligMessageFault">
+				<soap:fault name="OppdaterJournalpostAnsvarligMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalpostRestanser">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#FinnJournalpostRestanser" style="document"/>
+			<wsdl:input name="FinnJournalpostRestanserRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalpostRestanserRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalpostRestanserMessageFault">
+				<soap:fault name="FinnJournalpostRestanserMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterUnderArbeid">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#FinnJournalposterUnderArbeid" style="document"/>
+			<wsdl:input name="FinnJournalposterUnderArbeidRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterUnderArbeidRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterUnderArbeidMessageFault">
+				<soap:fault name="FinnJournalposterUnderArbeidMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeStatus">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#OppdaterMappeStatus" style="document"/>
+			<wsdl:input name="OppdaterMappeStatusRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterMappeStatusRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterMappeStatusMessageFault">
+				<soap:fault name="OppdaterMappeStatusMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OppdaterMappeAnsvarlig">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/UtvidetKjerne/Xml/Wsdl/20101001/#OppdaterMappeAnsvarlig" style="document"/>
+			<wsdl:input name="OppdaterMappeAnsvarligRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OppdaterMappeAnsvarligRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="OppdaterMappeAnsvarligMessageFault">
+				<soap:fault name="OppdaterMappeAnsvarligMessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="UtvidetKjerne">
+		<wsdl:port name="ArkivKjerneUtvidet" binding="tns:ArkivKjerneUtvidet">
+			<soap:address location="www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

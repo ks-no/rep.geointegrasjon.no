@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/Xml/Schema/20101001" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/Xml/Schema/20101001" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/Xml/Schema/20101001" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/Xml/Schema/20101001" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/Xml/Schema/20101001" xmlns:fellesorganisasjonns="http://rep.geointegrasjon.no/Felles/Organisasjon/Xml/Schema/20101001" xmlns:fellespersonns="http://rep.geointegrasjon.no/Felles/Person/Xml/Schema/20101001" xmlns:fellesfeilns="http://rep.geointegrasjon.no/Felles/Feil/Xml/Schema/20101001" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/Xml/Schema/20101001" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/Xml/Schema/20101001" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/Xml/Schema/20101001" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/Xml/Schema/20101001" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/Xml/Schema/20101001" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/Xml/Schema/20101001" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/Xml/Schema/20101001" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/Xml/Schema/20101001" elementFormDefault="qualified" version="20101001 - GeoIntegrasjon v0.96">
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/Xml/Schema/20101001/giFellesKontakt20101001.xsd"/>
+	<xs:import namespace="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001" schemaLocation="http://rep.geointegrasjon.no/Felles/Adresse/Xml/Schema/20101001/giFellesAdresse20101001.xsd"/>
+	<xs:element name="Dnummer" type="tns:Dnummer"/>
+	<xs:complexType name="Dnummer">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="DUFnummer" type="tns:DUFnummer"/>
+	<xs:complexType name="DUFnummer">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Fodselsnummer" type="tns:Fodselsnummer"/>
+	<xs:complexType name="Fodselsnummer">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="GenerellIdentifikator" type="tns:GenerellIdentifikator"/>
+	<xs:complexType name="GenerellIdentifikator">
+		<xs:annotation>
+			<xs:documentation>Generell identifikator i tilfeller der fødselsnummer ikke egner seg, f.eks. av personvernhensyn.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:DUFnummer">
+				<xs:sequence/>
+				<xs:attribute name="id-type" use="optional" type="tns:IdMetadata"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="IdMetadata" type="tns:IdMetadata"/>
+	<xs:complexType name="IdMetadata">
+		<xs:annotation>
+			<xs:documentation>
+    	            Forteller hvilken type metadata som finnes i identifikator.
+    			 Denne anbefalingen tar ikke sikte på å enumerere eller definere hvilke id typer som er tillat.
+    	        </xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Person" type="tns:Person"/>
+	<xs:complexType name="Person">
+		<xs:annotation>
+			<xs:documentation>Fra grunndatamodellen i SERES. Merk at det er gjort avvik i forhold til PersonIdentifikator. fødselsnummer, DUFnummer og dnummer er alle strenger med inntil 11 tegn.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="felleskontaktns:Kontakt">
+				<xs:sequence>
+					<xs:element name="fornavn" type="xs:string" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="etternavn" type="xs:string" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Adresse" type="fellesadressens:Adresse" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="id" type="tns:Personidentifikator" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Personidentifikator" type="tns:Personidentifikator"/>
+	<xs:complexType name="Personidentifikator">
+		<xs:sequence>
+			<xs:element name="dnummer" type="tns:Dnummer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="dufnummer" type="tns:DUFnummer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="fodselsnummer" type="tns:Fodselsnummer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="identifikator" type="tns:GenerellIdentifikator" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ArkivInnsyn" targetNamespace="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18" xmlns:tns="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18" xmlns:planbasisns="http://rep.geointegrasjon.no/Plan/Basis/xml.schema/2011.02.18" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2011.02.18" xmlns:planutvidetns="http://rep.geointegrasjon.no/Plan/Utvidet/xml.schema/2011.02.18" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2011.02.18" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2011.02.18" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2011.02.18" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.02.18" xmlns:fellesfilterns="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18" xmlns:skjemabyggesakns="http://rep.geointegrasjon.no/Skjema/Byggesak/xml.schema/2011.02.18" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" xmlns:kartbasisns="http://rep.geointegrasjon.no/Kart/Basis/xml.schema/2011.02.18" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18" xmlns:sakfaserns="http://rep.geointegrasjon.no/Sak/Faser/xml.schema/2011.02.18" xmlns:sakskjemans="http://rep.geointegrasjon.no/Sak/Skjema/xml.schema/2011.02.18" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2011.02.18" xmlns:matrikkelutvidetns="http://rep.geointegrasjon.no/Matrikkel/Utvidet/xml.schema/2011.02.18" xmlns:matrikkelbasisns="http://rep.geointegrasjon.no/Matrikkel/Basis/xml.schema/2011.02.18" elementFormDefault="qualified">
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2011.02.18/giFellesKodeliste20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2011.02.18/giArkivFelles20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2011.02.18/giArkivKjerne20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2011.02.18/giArkivDokument20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Filter/xml.schema/2011.02.18/giFellesFilter20110218.xsd"/>
+			<xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2011.02.18/giFellesTeknisk20110218.xsd"/>
+			<xs:element name="FinnDokumenter">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerFil" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="sok" type="fellesfilterns:SoekskriterieListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivdokumentns:DokumentListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnSaksmapper">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerTilleggsinformasjon" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerSakspart" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerKlasse" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerJournalpost" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="sok" type="fellesfilterns:SoekskriterieListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnSaksmapperResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:SaksmappeListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnSaksmapperFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterGittNoekkelFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenttyper">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnummer" type="arkivfellesns:Saksnummer" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenttyperResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivdokumentns:DokumenttypeListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenttyperFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterGittSaksmappeNoekkel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerTilleggsinformasjon" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerFil" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerDokument" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerKorrespondansepart" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerAvskrivning" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterGittSaksmappeNoekkelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:JournalpostListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterGittSaksmappeNoekkelFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentKodelister">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="kodelistenavn" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentKodelisterResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="felleskodelistens:KodeListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentKodelisterFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterGittSaksnoekkel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="saksnokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterGittSaksnoekkelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivdokumentns:DokumentListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterGittSaksnoekkelFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnSaksmapperGittNoekkel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nokkel" type="arkivfellesns:Saksnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerTilleggsinformasjon" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerSakspart" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerKlasse" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerJournalpost" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnSaksmapperGittNoekkelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:SaksmappeListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnSaksmapperGittNoekkelFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposter">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerTilleggsinformasjon" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerFil" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerDokument" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerKorrespondansepart" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerAvskrivning" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="sok" type="fellesfilterns:SoekskriterieListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:JournalpostListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentFil">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="systemid" type="arkivkjernens:SystemID" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentFilResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivdokumentns:Fil" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HentFilFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterGittJournalpostnoekkel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="journpostnokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterGittJournalpostnoekkelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivdokumentns:DokumentListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnDokumenterGittJournalpostnoekkelFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error" type="fellestekniskns:GeointegrasjonException" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterGittNoekkel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="kontekst" type="fellestekniskns:ArkivKontekst" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="nokkel" type="arkivkjernens:Journpostnoekkel" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerTilleggsinformasjon" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerFil" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerDokument" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerKorrespondansepart" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+						<xs:element name="returnerAvskrivning" type="xs:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FinnJournalposterGittNoekkelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="arkivkjernens:JournalpostListe" minOccurs="0" maxOccurs="1" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="FinnDokumenterMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenter"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenterResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnDokumenterFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperMessage">
+		<wsdl:part name="parameters" element="tns:FinnSaksmapper"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnSaksmapperResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnSaksmapperFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterGittSaksnoekkelMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenterGittSaksnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterGittSaksnoekkelResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenterGittSaksnoekkelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterGittSaksnoekkelFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnDokumenterGittSaksnoekkelFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperGittNoekkelMessage">
+		<wsdl:part name="parameters" element="tns:FinnSaksmapperGittNoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperGittNoekkelResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnSaksmapperGittNoekkelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnSaksmapperGittNoekkelFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnSaksmapperGittNoekkelFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposter"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposterResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnJournalposterFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilMessage">
+		<wsdl:part name="parameters" element="tns:HentFil"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentFilResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentFilFaultMessage">
+		<wsdl:part name="fault" element="tns:HentFilFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterGittJournalpostnoekkelMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenterGittJournalpostnoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterGittJournalpostnoekkelResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenterGittJournalpostnoekkelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenterGittJournalpostnoekkelFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnDokumenterGittJournalpostnoekkelFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittNoekkelMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposterGittNoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittNoekkelResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposterGittNoekkelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittNoekkelFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnJournalposterGittNoekkelFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenttyperMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenttyper"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenttyperResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnDokumenttyperResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnDokumenttyperFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnDokumenttyperFault"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittSaksmappeNoekkelMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposterGittSaksmappeNoekkel"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittSaksmappeNoekkelResponseMessage">
+		<wsdl:part name="parameters" element="tns:FinnJournalposterGittSaksmappeNoekkelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="FinnJournalposterGittSaksmappeNoekkelFaultMessage">
+		<wsdl:part name="fault" element="tns:FinnJournalposterGittSaksmappeNoekkelFault"/>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisterMessage">
+		<wsdl:part name="parameters" element="tns:HentKodelister"/>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisterResponseMessage">
+		<wsdl:part name="parameters" element="tns:HentKodelisterResponse"/>
+	</wsdl:message>
+	<wsdl:message name="HentKodelisterFaultMessage">
+		<wsdl:part name="fault" element="tns:HentKodelisterFault"/>
+	</wsdl:message>
+	<wsdl:portType name="ArkivInnsyn">
+		<wsdl:operation name="HentKodelister">
+			<wsdl:input name="HentKodelister" message="tns:HentKodelisterMessage"/>
+			<wsdl:output name="HentKodelisterResponse" message="tns:HentKodelisterResponseMessage"/>
+			<wsdl:fault name="HentKodelisterFault" message="tns:HentKodelisterFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittSaksmappeNoekkel">
+			<wsdl:input name="FinnJournalposterGittSaksmappeNoekkel" message="tns:FinnJournalposterGittSaksmappeNoekkelMessage"/>
+			<wsdl:output name="FinnJournalposterGittSaksmappeNoekkelResponse" message="tns:FinnJournalposterGittSaksmappeNoekkelResponseMessage"/>
+			<wsdl:fault name="FinnJournalposterGittSaksmappeNoekkelFault" message="tns:FinnJournalposterGittSaksmappeNoekkelFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenttyper">
+			<wsdl:input name="FinnDokumenttyper" message="tns:FinnDokumenttyperMessage"/>
+			<wsdl:output name="FinnDokumenttyperResponse" message="tns:FinnDokumenttyperResponseMessage"/>
+			<wsdl:fault name="FinnDokumenttyperFault" message="tns:FinnDokumenttyperFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittNoekkel">
+			<wsdl:input name="FinnJournalposterGittNoekkel" message="tns:FinnJournalposterGittNoekkelMessage"/>
+			<wsdl:output name="FinnJournalposterGittNoekkelResponse" message="tns:FinnJournalposterGittNoekkelResponseMessage"/>
+			<wsdl:fault name="FinnJournalposterGittNoekkelFault" message="tns:FinnJournalposterGittNoekkelFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenterGittJournalpostnoekkel">
+			<wsdl:input name="FinnDokumenterGittJournalpostnoekkel" message="tns:FinnDokumenterGittJournalpostnoekkelMessage"/>
+			<wsdl:output name="FinnDokumenterGittJournalpostnoekkelResponse" message="tns:FinnDokumenterGittJournalpostnoekkelResponseMessage"/>
+			<wsdl:fault name="FinnDokumenterGittJournalpostnoekkelFault" message="tns:FinnDokumenterGittJournalpostnoekkelFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="HentFil">
+			<wsdl:input name="HentFil" message="tns:HentFilMessage"/>
+			<wsdl:output name="HentFilResponse" message="tns:HentFilResponseMessage"/>
+			<wsdl:fault name="HentFilFault" message="tns:HentFilFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposter">
+			<wsdl:input name="FinnJournalposter" message="tns:FinnJournalposterMessage"/>
+			<wsdl:output name="FinnJournalposterResponse" message="tns:FinnJournalposterResponseMessage"/>
+			<wsdl:fault name="FinnJournalposterFault" message="tns:FinnJournalposterFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapperGittNoekkel">
+			<wsdl:input name="FinnSaksmapperGittNoekkel" message="tns:FinnSaksmapperGittNoekkelMessage"/>
+			<wsdl:output name="FinnSaksmapperGittNoekkelResponse" message="tns:FinnSaksmapperGittNoekkelResponseMessage"/>
+			<wsdl:fault name="FinnSaksmapperGittNoekkelFault" message="tns:FinnSaksmapperGittNoekkelFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenterGittSaksnoekkel">
+			<wsdl:input name="FinnDokumenterGittSaksnoekkel" message="tns:FinnDokumenterGittSaksnoekkelMessage"/>
+			<wsdl:output name="FinnDokumenterGittSaksnoekkelResponse" message="tns:FinnDokumenterGittSaksnoekkelResponseMessage"/>
+			<wsdl:fault name="FinnDokumenterGittSaksnoekkelFault" message="tns:FinnDokumenterGittSaksnoekkelFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapper">
+			<wsdl:input name="FinnSaksmapper" message="tns:FinnSaksmapperMessage"/>
+			<wsdl:output name="FinnSaksmapperResponse" message="tns:FinnSaksmapperResponseMessage"/>
+			<wsdl:fault name="FinnSaksmapperFault" message="tns:FinnSaksmapperFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenter">
+			<wsdl:input name="FinnDokumenter" message="tns:FinnDokumenterMessage"/>
+			<wsdl:output name="FinnDokumenterResponse" message="tns:FinnDokumenterResponseMessage"/>
+			<wsdl:fault name="FinnDokumenterFault" message="tns:FinnDokumenterFaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ArkivInnsyn" type="tns:ArkivInnsyn">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="HentKodelister">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#HentKodelister" style="document"/>
+			<wsdl:input name="HentKodelister">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentKodelisterResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentKodelisterFault">
+				<soap:fault name="HentKodelisterFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittSaksmappeNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnJournalposterGittSaksmappeNoekkel" style="document"/>
+			<wsdl:input name="FinnJournalposterGittSaksmappeNoekkel">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterGittSaksmappeNoekkelResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterGittSaksmappeNoekkelFault">
+				<soap:fault name="FinnJournalposterGittSaksmappeNoekkelFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenttyper">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnDokumenttyper" style="document"/>
+			<wsdl:input name="FinnDokumenttyper">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDokumenttyperResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnDokumenttyperFault">
+				<soap:fault name="FinnDokumenttyperFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposterGittNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnJournalposterGittNoekkel" style="document"/>
+			<wsdl:input name="FinnJournalposterGittNoekkel">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterGittNoekkelResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterGittNoekkelFault">
+				<soap:fault name="FinnJournalposterGittNoekkelFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenterGittJournalpostnoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnDokumenterGittJournalpostnoekkel" style="document"/>
+			<wsdl:input name="FinnDokumenterGittJournalpostnoekkel">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDokumenterGittJournalpostnoekkelResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnDokumenterGittJournalpostnoekkelFault">
+				<soap:fault name="FinnDokumenterGittJournalpostnoekkelFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="HentFil">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#HentFil" style="document"/>
+			<wsdl:input name="HentFil">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="HentFilResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="HentFilFault">
+				<soap:fault name="HentFilFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnJournalposter">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnJournalposter" style="document"/>
+			<wsdl:input name="FinnJournalposter">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnJournalposterResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnJournalposterFault">
+				<soap:fault name="FinnJournalposterFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapperGittNoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnSaksmapperGittNoekkel" style="document"/>
+			<wsdl:input name="FinnSaksmapperGittNoekkel">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnSaksmapperGittNoekkelResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnSaksmapperGittNoekkelFault">
+				<soap:fault name="FinnSaksmapperGittNoekkelFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenterGittSaksnoekkel">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnDokumenterGittSaksnoekkel" style="document"/>
+			<wsdl:input name="FinnDokumenterGittSaksnoekkel">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDokumenterGittSaksnoekkelResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnDokumenterGittSaksnoekkelFault">
+				<soap:fault name="FinnDokumenterGittSaksnoekkelFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnSaksmapper">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnSaksmapper" style="document"/>
+			<wsdl:input name="FinnSaksmapper">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnSaksmapperResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnSaksmapperFault">
+				<soap:fault name="FinnSaksmapperFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="FinnDokumenter">
+			<soap:operation soapAction="http://rep.geointegrasjon.no/Arkiv/Innsyn/xml.wsdl/2011.02.18/#FinnDokumenter" style="document"/>
+			<wsdl:input name="FinnDokumenter">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="FinnDokumenterResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FinnDokumenterFault">
+				<soap:fault name="FinnDokumenterFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Innsyn">
+		<wsdl:port name="ArkivInnsyn" binding="tns:ArkivInnsyn">
+			<soap:address location="http://www.exampleLocation.com/Port1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
